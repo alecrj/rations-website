@@ -1,0 +1,503 @@
+---
+// src/pages/intro.astro
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RATIONS - Standard Issue Seasonings</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff00;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .terminal {
+            width: 90%;
+            max-width: 900px;
+            height: 80vh;
+            background: #1a1a1a;
+            border: 3px solid #333;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 
+                0 0 25px rgba(0, 255, 0, 0.15),
+                inset 0 0 25px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terminal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 255, 0, 0.04) 2px,
+                    rgba(0, 255, 0, 0.04) 4px
+                );
+            pointer-events: none;
+        }
+
+        .terminal-content {
+            height: 100%;
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .terminal-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        .typewriter-text {
+            font-size: 19px;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            color: #00ff00;
+            letter-spacing: 1.2px;
+            min-height: 100%;
+            text-shadow: 0 0 3px rgba(0, 255, 0, 0.3);
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 21px;
+            background: #00ff00;
+            animation: blink 1s infinite;
+            margin-left: 2px;
+            box-shadow: 0 0 4px rgba(0, 255, 0, 0.4);
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .skip-hint {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        .website {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 35% 65%, rgba(107, 142, 35, 0.12) 0%, transparent 50%),
+                linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 1.2s ease;
+            color: #f5f5dc;
+            text-align: center;
+        }
+
+        .website.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .logo {
+            font-size: 4.2rem;
+            font-weight: bold;
+            letter-spacing: 10px;
+            color: #8FBC8F;
+            margin-bottom: 25px;
+            text-shadow: 
+                3px 3px 0px #2F4F2F,
+                6px 6px 12px rgba(0, 0, 0, 0.6);
+        }
+
+        .tagline {
+            font-size: 1.6rem;
+            margin-bottom: 45px;
+            color: #d2b48c;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .enter-btn {
+            background: linear-gradient(135deg, #8FBC8F 0%, #6B8E23 100%);
+            color: #1a1a1a;
+            border: 2px solid #556B2F;
+            padding: 18px 35px;
+            font-size: 1.3rem;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.4s ease;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .enter-btn:hover {
+            background: linear-gradient(135deg, #9ACD32 0%, #7BA428 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .terminal {
+                padding: 25px;
+                width: 95%;
+                height: 85vh;
+            }
+            
+            .typewriter-text {
+                font-size: 17px;
+                line-height: 1.6;
+            }
+            
+            .logo {
+                font-size: 3rem;
+                letter-spacing: 6px;
+            }
+            
+            .tagline {
+                font-size: 1.3rem;
+                letter-spacing: 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="terminal-content" id="terminal-scroll">
+            <div class="typewriter-text" id="content"></div>
+            <span class="cursor" id="cursor"></span>
+        </div>
+    </div>
+
+    <div class="skip-hint">
+        Press SPACE or click to skip
+    </div>
+
+    <div class="website" id="website">
+        <div class="logo">RATIONS</div>
+        <div class="tagline">Standard Issue</div>
+        <button class="enter-btn" onclick="window.location.href='/supply-depot'">Enter Supply Depot</button>
+    </div>
+
+    <script>
+        // @ts-nocheck
+        const content = document.getElementById('content');
+        const cursor = document.getElementById('cursor');
+        const terminalScroll = document.getElementById('terminal-scroll');
+        let isSkipped = false;
+        let currentIndex = 0;
+        let audioContext = null;
+
+        const text = `> ACCESSING CLASSIFIED TERMINAL...
+> LOGIN SUCCESSFUL
+> RETRIEVING FILE: PROJECT_FLAVOR.txt
+
+========================================
+CONFIDENTIAL - EYES ONLY
+========================================
+
+PROJECT: OPERATION FLAVOR SUPERIORITY
+DATE: ${new Date().toLocaleDateString()}
+CLEARANCE: LEVEL 7
+
+MISSION BRIEF:
+
+For too long, home cooks have been forced to 
+use substandard seasonings. Generic blends.
+Bland combinations. Flavorless disasters.
+
+NO MORE.
+
+Our research division has spent years perfecting
+the ultimate tactical seasoning solution.
+
+BREAKTHROUGH ACHIEVED.
+
+Product: RATIONS SPICE BLEND
+Code Name: "STANDARD ISSUE"
+Classification: FIELD TESTED ✓
+Deployment Status: AUTHORIZED
+
+CAPABILITIES:
+- Transforms any protein instantly
+- Elevates vegetables beyond recognition  
+- Makes rice actually exciting
+- Turns basic meals into memorable experiences
+- Compatible with ALL cooking methods
+
+Field testing across 847 kitchens shows:
+- 340% improvement in meal satisfaction
+- 89% reduction in bland food incidents
+- 100% success rate in flavor enhancement
+
+This isn't just seasoning.
+This is culinary domination.
+
+Whether you're grilling steaks, roasting chicken,
+seasoning vegetables, or cooking pasta...
+STANDARD ISSUE delivers tactical flavor superiority.
+
+MISSION PARAMETERS:
+Deploy on everything. Leave no meal unseasoned.
+
+CLASSIFICATION: CLASSIFIED[CORRECTION_POINT]DECLASSIFIED
+AUTHORIZATION: APPROVED FOR PUBLIC RELEASE
+
+The flavor revolution begins now.
+
+What makes STANDARD ISSUE legendary?
+
+That's still classified.
+
+> TRANSMISSION COMPLETE
+> INITIALIZING SUPPLY DEPOT ACCESS...`;
+
+        function initAudio() {
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                console.log('Audio context created:', audioContext.state);
+            } catch (e) {
+                console.log('Audio not available:', e);
+            }
+        }
+
+        function ensureAudioContext() {
+            if (!audioContext) {
+                initAudio();
+            }
+            if (audioContext && audioContext.state === 'suspended') {
+                audioContext.resume().then(() => {
+                    console.log('Audio context resumed');
+                });
+            }
+        }
+
+        function playSubtleClick() {
+            ensureAudioContext();
+            if (!audioContext || audioContext.state !== 'running') return;
+            
+            try {
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+                
+                // Very subtle, soft click
+                osc.frequency.setValueAtTime(200 + Math.random() * 100, audioContext.currentTime);
+                osc.type = 'sine';
+                
+                gain.gain.setValueAtTime(0, audioContext.currentTime);
+                gain.gain.linearRampToValueAtTime(0.02, audioContext.currentTime + 0.01);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.06);
+                
+                osc.start(audioContext.currentTime);
+                osc.stop(audioContext.currentTime + 0.06);
+            } catch (e) {
+                // Silent fail
+            }
+        }
+
+        function playSystemChime() {
+            ensureAudioContext();
+            if (!audioContext || audioContext.state !== 'running') return;
+            
+            try {
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+                
+                osc.frequency.setValueAtTime(400, audioContext.currentTime);
+                osc.frequency.linearRampToValueAtTime(500, audioContext.currentTime + 0.1);
+                osc.type = 'sine';
+                
+                gain.gain.setValueAtTime(0, audioContext.currentTime);
+                gain.gain.linearRampToValueAtTime(0.04, audioContext.currentTime + 0.02);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.15);
+                
+                osc.start(audioContext.currentTime);
+                osc.stop(audioContext.currentTime + 0.15);
+            } catch (e) {
+                // Silent fail
+            }
+        }
+
+        function autoScroll() {
+            terminalScroll.scrollTop = terminalScroll.scrollHeight;
+        }
+
+        let isCorrectingClassification = false;
+
+        function type() {
+            if (isSkipped || currentIndex >= text.length) {
+                finish();
+                return;
+            }
+
+            // Check for correction point
+            if (text.substring(currentIndex, currentIndex + 18) === '[CORRECTION_POINT]') {
+                currentIndex += 18; // Skip the marker
+                isCorrectingClassification = true;
+                
+                // Show CLASSIFIED first
+                content.textContent += 'CLASSIFIED';
+                
+                // Pause, then start correction
+                setTimeout(() => {
+                    if (!isSkipped) {
+                        correctClassification();
+                    }
+                }, 1500);
+                return;
+            }
+
+            const char = text[currentIndex];
+            content.textContent += char;
+            
+            // Enhanced audio feedback
+            if (char === '>') {
+                playSystemChime();
+            } else if (char !== ' ' && char !== '\n' && char !== '=') {
+                playSubtleClick();
+            }
+            
+            // Smooth auto-scroll every few characters
+            if (currentIndex % 4 === 0) {
+                autoScroll();
+            }
+            
+            currentIndex++;
+            
+            let delay = 30;
+            if (char === '\n') delay = 100;
+            else if (char === '.' || char === ':' || char === '!') delay = 80;
+            else if (char === ' ') delay = 15;
+            else if (char === '>') delay = 180;
+            setTimeout(() => type(), delay + Math.random() * 10);
+        }
+
+        function correctClassification() {
+            // Backspace "CLASSIFIED" (10 characters)
+            let backspaceCount = 0;
+            const backspaceInterval = setInterval(() => {
+                if (backspaceCount >= 10 || isSkipped) {
+                    clearInterval(backspaceInterval);
+                    // Now type "DECLASSIFIED"
+                    setTimeout(() => {
+                        if (!isSkipped) {
+                            typeCorrection('DECLASSIFIED', 0);
+                        }
+                    }, 200);
+                    return;
+                }
+                
+                content.textContent = content.textContent.slice(0, -1);
+                backspaceCount++;
+            }, 50);
+        }
+
+        function typeCorrection(word, charIndex) {
+            if (charIndex >= word.length || isSkipped) {
+                // Continue with normal typing
+                setTimeout(() => {
+                    if (!isSkipped) {
+                        type();
+                    }
+                }, 300);
+                return;
+            }
+            
+            content.textContent += word[charIndex];
+            playSubtleClick();
+            
+            setTimeout(() => {
+                typeCorrection(word, charIndex + 1);
+            }, 80);
+        }
+
+        function finish() {
+            if (isSkipped) {
+                content.textContent = text;
+            }
+            
+            autoScroll();
+            cursor.style.display = 'none';
+            
+            setTimeout(() => playSystemChime(), 400);
+            setTimeout(() => showWebsite(), 2200);
+        }
+
+        function showWebsite() {
+            document.querySelector('.terminal').style.transform = 'scale(0.85) rotateX(3deg)';
+            document.querySelector('.terminal').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('website').classList.add('show');
+            }, 500);
+        }
+
+        function skip() {
+            if (isSkipped) return;
+            isSkipped = true;
+            finish();
+        }
+
+        function handleFirstInteraction() {
+            ensureAudioContext();
+            skip();
+        }
+
+        document.addEventListener('click', handleFirstInteraction);
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                handleFirstInteraction();
+            }
+        });
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                // Initialize audio but don't start until user interacts
+                initAudio();
+                type();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
