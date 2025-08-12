@@ -103,17 +103,28 @@
 
         .skip-hint {
             position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
+            top: 20px;
+            right: 20px;
             color: #666;
-            font-size: 14px;
+            font-size: 13px;
             text-align: center;
-            opacity: 0.8;
+            opacity: 0.7;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 8px 16px;
-            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #333;
+            backdrop-filter: blur(5px);
+            font-family: 'Courier New', monospace;
+            transition: opacity 0.3s ease;
+        }
+
+        .skip-hint:hover {
+            opacity: 1;
+        }
+
+        .skip-hint::before {
+            content: "Click to skip";
         }
 
         .website {
@@ -206,6 +217,13 @@
                 height: 18px;
             }
             
+            .skip-hint {
+                top: 15px;
+                right: 15px;
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+            
             .logo {
                 font-size: 3rem;
                 letter-spacing: 6px;
@@ -229,6 +247,17 @@
                 line-height: 1.5;
             }
             
+            .cursor {
+                height: 16px;
+            }
+            
+            .skip-hint {
+                top: 10px;
+                right: 10px;
+                font-size: 11px;
+                padding: 5px 8px;
+            }
+            
             .logo {
                 font-size: 2.5rem;
                 letter-spacing: 4px;
@@ -245,9 +274,7 @@
         </div>
     </div>
 
-    <div class="skip-hint">
-        Press SPACE or click to skip
-    </div>
+    <div class="skip-hint" id="skip-hint">Click to skip</div>
 
     <div class="website" id="website">
         <div class="logo">RATIONS</div>
@@ -260,10 +287,13 @@
         const content = document.getElementById('content');
         const cursor = document.getElementById('cursor');
         const terminalContainer = document.getElementById('terminal-container');
+        const skipHint = document.getElementById('skip-hint');
         let isSkipped = false;
         let currentIndex = 0;
         let audioContext = null;
         let scrollOffset = 0;
+        let isCorrectingClassification = false;
+        let remainingTextAfterCorrection = '';
 
         const text = `> ACCESSING CLASSIFIED TERMINAL...
 > LOGIN SUCCESSFUL
@@ -402,7 +432,6 @@ That's still classified.
 
         function autoScroll() {
             const containerHeight = terminalContainer.clientHeight;
-            const contentHeight = content.offsetHeight;
             const cursorPosition = cursor.offsetTop + cursor.offsetHeight;
             
             // Calculate smooth scroll position
@@ -420,7 +449,15 @@ That's still classified.
             }
         }
 
-        let remainingText = '';
+        function getCurrentText() {
+            let textContent = '';
+            for (let node of content.childNodes) {
+                if (node !== cursor && node.nodeType === Node.TEXT_NODE) {
+                    textContent += node.textContent;
+                }
+            }
+            return textContent;
+        }
 
         function type() {
             if (isSkipped || currentIndex >= text.length) {
@@ -434,18 +471,25 @@ That's still classified.
             const textNode = document.createTextNode(char);
             content.insertBefore(textNode, cursor);
             
-            // Check if we just finished typing "CLASSIFIED"
-            const currentText = getCurrentText();
-            if (currentText.endsWith('CLASSIFICATION: CLASSIFIED') && !remainingText) {
-                // Store the remaining text to type after correction
-                remainingText = text.substring(currentIndex + 1);
+            // Check if we just finished typing "CLASSIFICATION: CLASSIFIED"
+            // Look for the exact position in the original text
+            const classifiedPosition = text.indexOf('CLASSIFICATION: CLASSIFIED');
+            const classifiedEnd = classifiedPosition + 'CLASSIFICATION: CLASSIFIED'.length;
+            
+            if (currentIndex === classifiedEnd - 1 && !isCorrectingClassification) {
+                isCorrectingClassification = true;
                 
-                // Start correction immediately
+                console.log('Starting classification correction at index:', currentIndex);
+                
+                // Store the remaining text after this point
+                remainingTextAfterCorrection = text.substring(currentIndex + 1);
+                
+                // Start correction after a pause
                 setTimeout(() => {
                     if (!isSkipped) {
-                        correctClassificationImmediate();
+                        startClassificationCorrection();
                     }
-                }, 500);
+                }, 800);
                 return;
             }
             
@@ -456,8 +500,8 @@ That's still classified.
                 playSubtleClick();
             }
             
-            // Smooth auto-scroll every character for better experience
-            if (currentIndex % 2 === 0) {
+            // Smooth auto-scroll every few characters for better performance
+            if (currentIndex % 3 === 0) {
                 requestAnimationFrame(() => autoScroll());
             }
             
@@ -472,14 +516,125 @@ That's still classified.
             setTimeout(() => type(), delay + Math.random() * 10);
         }
 
-        function getCurrentText() {
-            let textContent = '';
-            for (let node of content.childNodes) {
-                if (node !== cursor && node.nodeType === Node.TEXT_NODE) {
-                    textContent += node.textContent;
-                }
+        function startClassificationCorrection() {
+            console.log('Starting classification correction');
+            
+            const currentText = getCurrentText();
+            const beforeClassifiedIndex = currentText.lastIndexOf('CLASSIFICATION: ');
+            
+            if (beforeClassifiedIndex === -1) {
+                console.log('Could not find CLASSIFICATION: in text');
+                continueTypingAfterCorrection();
+                return;
             }
-            return textContent;
+            
+            const beforeClassified = currentText.substring(0, beforeClassifiedIndex + 'CLASSIFICATION: '.length);
+            console.log('Before classified text:', beforeClassified);
+            
+            // Start backspacing "CLASSIFIED"
+            backspaceClassified(beforeClassified, 'CLASSIFIED', 0);
+        }
+
+        function backspaceClassified(beforeText, wordToBackspace, backspaceCount) {
+            if (backspaceCount >= wordToBackspace.length || isSkipped) {
+                console.log('Finished backspacing, starting to type DECLASSIFIED');
+                // Start typing "DECLASSIFIED"
+                setTimeout(() => {
+                    if (!isSkipped) {
+                        typeNewClassification(beforeText, 'DECLASSIFIED', 0);
+                    }
+                }, 150);
+                return;
+            }
+            
+            const remainingWord = wordToBackspace.substring(0, wordToBackspace.length - backspaceCount - 1);
+            console.log('Backspacing:', beforeText + remainingWord);
+            
+            // Clear all text and rebuild with the partial word
+            while (content.firstChild && content.firstChild !== cursor) {
+                content.removeChild(content.firstChild);
+            }
+            
+            const textNode = document.createTextNode(beforeText + remainingWord);
+            content.insertBefore(textNode, cursor);
+            
+            requestAnimationFrame(() => autoScroll());
+            
+            setTimeout(() => {
+                backspaceClassified(beforeText, wordToBackspace, backspaceCount + 1);
+            }, 60);
+        }
+
+        function typeNewClassification(beforeText, newWord, charIndex) {
+            if (charIndex >= newWord.length || isSkipped) {
+                console.log('Finished typing DECLASSIFIED, continuing with remaining text');
+                // Correction complete, continue with remaining text
+                setTimeout(() => {
+                    if (!isSkipped) {
+                        continueTypingAfterCorrection();
+                    }
+                }, 200);
+                return;
+            }
+            
+            const partialWord = newWord.substring(0, charIndex + 1);
+            console.log('Typing:', beforeText + partialWord);
+            
+            // Clear all text and rebuild with the new partial word
+            while (content.firstChild && content.firstChild !== cursor) {
+                content.removeChild(content.firstChild);
+            }
+            
+            const textNode = document.createTextNode(beforeText + partialWord);
+            content.insertBefore(textNode, cursor);
+            
+            playSubtleClick();
+            requestAnimationFrame(() => autoScroll());
+            
+            setTimeout(() => {
+                typeNewClassification(beforeText, newWord, charIndex + 1);
+            }, 80);
+        }
+
+        function continueTypingAfterCorrection() {
+            console.log('Continuing with remaining text:', remainingTextAfterCorrection.substring(0, 50) + '...');
+            
+            // Continue typing the remaining text character by character
+            let remainingIndex = 0;
+            
+            function typeRemainingChar() {
+                if (remainingIndex >= remainingTextAfterCorrection.length || isSkipped) {
+                    console.log('Finished typing all remaining text');
+                    finish();
+                    return;
+                }
+                
+                const char = remainingTextAfterCorrection[remainingIndex];
+                const textNode = document.createTextNode(char);
+                content.insertBefore(textNode, cursor);
+                
+                if (char === '>') {
+                    playSystemChime();
+                } else if (char !== ' ' && char !== '\n' && char !== '=') {
+                    playSubtleClick();
+                }
+                
+                if (remainingIndex % 3 === 0) {
+                    requestAnimationFrame(() => autoScroll());
+                }
+                
+                remainingIndex++;
+                
+                let delay = 30;
+                if (char === '\n') delay = 100;
+                else if (char === '.' || char === ':' || char === '!') delay = 80;
+                else if (char === ' ') delay = 15;
+                else if (char === '>') delay = 180;
+                
+                setTimeout(typeRemainingChar, delay + Math.random() * 10);
+            }
+            
+            typeRemainingChar();
         }
 
         function finish() {
@@ -494,115 +649,10 @@ That's still classified.
                 requestAnimationFrame(() => autoScroll());
             }
             
-            // Hide cursor and show website
+            // Hide cursor and skip hint
             cursor.style.display = 'none';
+            skipHint.style.opacity = '0';
             setTimeout(() => showWebsite(), 2000);
-        }
-
-        function correctClassificationImmediate() {
-            const currentText = getCurrentText();
-            const classifiedIndex = currentText.lastIndexOf('CLASSIFICATION: CLASSIFIED');
-            
-            if (classifiedIndex === -1) {
-                continueTypingRemaining();
-                return;
-            }
-            
-            const beforeClassified = currentText.substring(0, classifiedIndex + 'CLASSIFICATION: '.length);
-            
-            // Start backspacing "CLASSIFIED"
-            let backspaceCount = 0;
-            const backspaceInterval = setInterval(() => {
-                if (backspaceCount >= 10 || isSkipped) { // "CLASSIFIED" is 10 chars
-                    clearInterval(backspaceInterval);
-                    // Now type "DECLASSIFIED"
-                    setTimeout(() => {
-                        if (!isSkipped) {
-                            typeNewWordImmediate(beforeClassified, 'DECLASSIFIED', 0);
-                        }
-                    }, 200);
-                    return;
-                }
-                
-                const currentWord = 'CLASSIFIED'.substring(0, 10 - backspaceCount - 1);
-                // Clear text nodes but keep cursor
-                while (content.firstChild && content.firstChild !== cursor) {
-                    content.removeChild(content.firstChild);
-                }
-                const newTextNode = document.createTextNode(beforeClassified + currentWord);
-                content.insertBefore(newTextNode, cursor);
-                requestAnimationFrame(() => autoScroll());
-                backspaceCount++;
-            }, 60);
-        }
-
-        function typeNewWordImmediate(before, word, charIndex) {
-            if (charIndex >= word.length || isSkipped) {
-                // Continue typing the remaining text
-                setTimeout(() => {
-                    if (!isSkipped) {
-                        continueTypingRemaining();
-                    }
-                }, 200);
-                return;
-            }
-            
-            const currentWord = word.substring(0, charIndex + 1);
-            // Clear text nodes but keep cursor
-            while (content.firstChild && content.firstChild !== cursor) {
-                content.removeChild(content.firstChild);
-            }
-            const newTextNode = document.createTextNode(before + currentWord);
-            content.insertBefore(newTextNode, cursor);
-            playSubtleClick();
-            requestAnimationFrame(() => autoScroll());
-            
-            setTimeout(() => {
-                typeNewWordImmediate(before, word, charIndex + 1);
-            }, 80);
-        }
-
-        function continueTypingRemaining() {
-            if (!remainingText || isSkipped) {
-                finish();
-                return;
-            }
-            
-            // Continue typing character by character from remaining text
-            let remainingIndex = 0;
-            
-            function typeRemainingChar() {
-                if (remainingIndex >= remainingText.length || isSkipped) {
-                    finish();
-                    return;
-                }
-                
-                const char = remainingText[remainingIndex];
-                const textNode = document.createTextNode(char);
-                content.insertBefore(textNode, cursor);
-                
-                if (char === '>') {
-                    playSystemChime();
-                } else if (char !== ' ' && char !== '\n' && char !== '=') {
-                    playSubtleClick();
-                }
-                
-                if (remainingIndex % 2 === 0) {
-                    requestAnimationFrame(() => autoScroll());
-                }
-                
-                remainingIndex++;
-                
-                let delay = 30;
-                if (char === '\n') delay = 100;
-                else if (char === '.' || char === ':' || char === '!') delay = 80;
-                else if (char === ' ') delay = 15;
-                else if (char === '>') delay = 180;
-                
-                setTimeout(() => typeRemainingChar(), delay + Math.random() * 10);
-            }
-            
-            typeRemainingChar();
         }
 
         function showWebsite() {
