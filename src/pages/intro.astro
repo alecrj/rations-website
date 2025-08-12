@@ -102,29 +102,31 @@
         }
 
         .skip-hint {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            color: #666;
-            font-size: 13px;
-            text-align: center;
-            opacity: 0.7;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 8px 12px;
-            border-radius: 6px;
-            border: 1px solid #333;
-            backdrop-filter: blur(5px);
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            color: rgba(0, 255, 0, 0.4);
+            font-size: 11px;
             font-family: 'Courier New', monospace;
-            transition: opacity 0.3s ease;
+            opacity: 0.6;
+            z-index: 100;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+            padding: 2px 0;
+            border-bottom: 1px solid transparent;
         }
 
         .skip-hint:hover {
             opacity: 1;
+            color: rgba(0, 255, 0, 0.8);
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+            text-shadow: 0 0 2px rgba(0, 255, 0, 0.3);
         }
 
         .skip-hint::before {
-            content: "Click to skip";
+            content: "[ESC] ";
+            color: rgba(0, 255, 0, 0.2);
         }
 
         .website {
@@ -218,10 +220,9 @@
             }
             
             .skip-hint {
-                top: 15px;
-                right: 15px;
-                font-size: 12px;
-                padding: 6px 10px;
+                bottom: 12px;
+                right: 12px;
+                font-size: 10px;
             }
             
             .logo {
@@ -252,10 +253,9 @@
             }
             
             .skip-hint {
-                top: 10px;
+                bottom: 10px;
                 right: 10px;
-                font-size: 11px;
-                padding: 5px 8px;
+                font-size: 9px;
             }
             
             .logo {
@@ -272,9 +272,8 @@
                 <span class="cursor" id="cursor"></span>
             </div>
         </div>
+        <div class="skip-hint" id="skip-hint">skip</div>
     </div>
-
-    <div class="skip-hint" id="skip-hint">Click to skip</div>
 
     <div class="website" id="website">
         <div class="logo">RATIONS</div>
@@ -675,8 +674,12 @@ That's still classified.
         }
 
         document.addEventListener('click', handleFirstInteraction);
+        skipHint.addEventListener('click', (e) => {
+            e.stopPropagation();
+            handleFirstInteraction();
+        });
         document.addEventListener('keydown', (e) => {
-            if (e.code === 'Space') {
+            if (e.code === 'Space' || e.code === 'Escape') {
                 e.preventDefault();
                 handleFirstInteraction();
             }
