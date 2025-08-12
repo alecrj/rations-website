@@ -1,7 +1,3 @@
----
-// src/pages/supply-depot.astro
----
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +25,7 @@
             overflow-x: hidden;
         }
 
-        /* Navigation */
+        /* Navigation - ORIGINAL DESKTOP STYLES */
         .nav-container {
             background: 
                 linear-gradient(90deg, rgba(45, 45, 31, 0.9) 0%, rgba(60, 60, 40, 0.9) 100%),
@@ -95,7 +91,7 @@
             text-shadow: 0 0 5px rgba(143, 188, 143, 0.5);
         }
 
-        /* Document Container */
+        /* Document Container - ORIGINAL DESKTOP */
         .document-container {
             max-width: 900px;
             margin: 2rem auto;
@@ -133,7 +129,7 @@
             font-size: 1.5rem;
         }
 
-        /* Document Pages */
+        /* Document Pages - ORIGINAL DESKTOP */
         .document-page {
             background: 
                 linear-gradient(to bottom, rgba(212, 193, 158, 0.95), rgba(196, 176, 148, 0.95)),
@@ -196,7 +192,7 @@
             color: #4a5d3a;
         }
 
-        /* Content Sections */
+        /* Content Sections - ORIGINAL DESKTOP */
         .section {
             margin-bottom: 3rem;
         }
@@ -223,7 +219,7 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Product Specs */
+        /* Product Specs - ORIGINAL DESKTOP */
         .product-specs {
             background: rgba(255,255,255,0.4);
             border: 2px solid #8a7a5a;
@@ -265,7 +261,7 @@
             font-size: 0.9rem;
         }
 
-        /* Order Section */
+        /* Order Section - ORIGINAL DESKTOP */
         .order-section {
             background: rgba(143, 188, 143, 0.1);
             border: 1px solid #8FBC8F;
@@ -304,7 +300,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
-        /* Stamps */
+        /* Stamps - ORIGINAL DESKTOP */
         .document-stamps {
             position: absolute;
             top: 0;
@@ -329,16 +325,77 @@
         .stamp-2 { bottom: 30px; left: 30px; transform: rotate(8deg); background: rgba(0, 100, 0, 0.6); }
         .stamp-3 { top: 50%; left: 20px; transform: translateY(-50%) rotate(-90deg); background: rgba(0, 0, 255, 0.6); }
 
-        /* Responsive */
+        /* Mobile Menu - ONLY MOBILE */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: 2px solid #d4c19e;
+            color: #d4c19e;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle:hover {
+            border-color: #8FBC8F;
+            color: #8FBC8F;
+        }
+
+        .mobile-nav-links {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(45, 45, 31, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid #4a5d3a;
+            padding: 1rem 0;
+        }
+
+        .mobile-nav-links.show {
+            display: block;
+        }
+
+        .mobile-nav-links a {
+            display: block;
+            padding: 1rem 2rem;
+            color: #d4c19e;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0,0,0,0.1);
+        }
+
+        .mobile-nav-links a:hover, .mobile-nav-links a.active {
+            color: #8FBC8F;
+            background: rgba(143, 188, 143, 0.1);
+            text-shadow: 0 0 5px rgba(143, 188, 143, 0.5);
+        }
+
+        /* MOBILE RESPONSIVE - ONLY AFFECTS MOBILE */
         @media (max-width: 768px) {
             .nav-content {
-                flex-direction: column;
+                flex-direction: row;
+                justify-content: space-between;
                 gap: 1rem;
                 padding: 1rem;
+                position: relative;
             }
 
             .nav-links {
-                gap: 1rem;
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
             }
 
             .document-container {
@@ -357,6 +414,101 @@
             .doc-info {
                 grid-template-columns: 1fr;
             }
+
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header {
+                font-size: 1.1rem;
+                padding: 0.6rem 0.8rem;
+            }
+
+            .section-content {
+                font-size: 1rem;
+            }
+
+            .product-specs {
+                padding: 1.2rem;
+            }
+
+            .order-section {
+                padding: 1.5rem;
+            }
+
+            .order-button {
+                width: 100%;
+                max-width: 300px;
+                padding: 1.2rem 2rem;
+            }
+
+            .price-display {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+                padding: 6px 12px;
+            }
+
+            .nav-content {
+                padding: 0.8rem;
+            }
+
+            .document-page {
+                padding: 1.5rem 1rem;
+            }
+
+            .doc-title {
+                font-size: 1.5rem;
+                letter-spacing: 1px;
+            }
+
+            .classified-header {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+                letter-spacing: 2px;
+            }
+
+            .classified-header::before,
+            .classified-header::after {
+                font-size: 1.2rem;
+            }
+
+            .mobile-nav-links a {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .price-display {
+                font-size: 1.3rem;
+            }
+
+            .order-button {
+                padding: 1rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Touch-friendly improvements */
+        @media (pointer: coarse) {
+            .mobile-menu-toggle {
+                min-height: 44px;
+                min-width: 60px;
+            }
+
+            .mobile-nav-links a {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+
+            .order-button {
+                min-height: 50px;
+            }
         }
     </style>
 </head>
@@ -365,12 +517,25 @@
     <nav class="nav-container">
         <div class="nav-content">
             <a href="/supply-depot" class="logo">RATIONS</a>
+            
+            <!-- Desktop Navigation -->
             <ul class="nav-links">
                 <li><a href="/supply-depot" class="active">Supply Depot</a></li>
                 <li><a href="/mission-brief">Mission Brief</a></li>
                 <li><a href="/merchandise">Surplus Gear</a></li>
                 <li><a href="/field-manual">Field Manual</a></li>
             </ul>
+
+            <!-- Mobile Menu Toggle - ONLY VISIBLE ON MOBILE -->
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">MENU</button>
+            
+            <!-- Mobile Navigation - ONLY VISIBLE ON MOBILE -->
+            <div class="mobile-nav-links" id="mobile-nav">
+                <a href="/supply-depot" class="active">Supply Depot</a>
+                <a href="/mission-brief">Mission Brief</a>
+                <a href="/merchandise">Surplus Gear</a>
+                <a href="/field-manual">Field Manual</a>
+            </div>
         </div>
     </nav>
 
@@ -420,62 +585,123 @@
                     
                     <p>Following extensive declassification reviews, this formerly restricted seasoning compound has been approved for civilian procurement. Each container provides sufficient seasoning for approximately 100 standard meal preparations.</p>
                     
-                    <p>Quality assurance protocols ensure consistent flavor deployment across all production batches. No artificial additives or preservatives compromise the tactical effectiveness of this seasoning system.</p>
+                    <p>Quality assurance protocols ensure consistent flavor deployment across all production batches. Military-grade ingredients sourced from classified suppliers guarantee tactical advantage over commercial alternatives.</p>
                 </div>
             </div>
 
-            <!-- Specifications -->
-            <div class="product-specs">
-                <div class="specs-header">TECHNICAL SPECIFICATIONS</div>
-                <div class="specs-grid">
-                    <div class="spec-item">
-                        <div class="spec-label">CONTENT WEIGHT:</div>
-                        <div class="spec-value">4.5 OZ (128g)</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-label">CONTAINER TYPE:</div>
-                        <div class="spec-value">TACTICAL SHAKER</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-label">SHELF LIFE:</div>
-                        <div class="spec-value">24 MONTHS</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-label">STORAGE TEMP:</div>
-                        <div class="spec-value">ROOM TEMPERATURE</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-label">SODIUM CONTENT:</div>
-                        <div class="spec-value">BALANCED</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-label">ALLERGEN STATUS:</div>
-                        <div class="spec-value">NONE DETECTED</div>
+            <!-- Product Specifications -->
+            <div class="section">
+                <div class="section-header">II. TECHNICAL SPECIFICATIONS</div>
+                <div class="product-specs">
+                    <div class="specs-header">STANDARD ISSUE TACTICAL SEASONING</div>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <div class="spec-label">CONTAINER SIZE:</div>
+                            <div class="spec-value">4oz Standard</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">SHELF LIFE:</div>
+                            <div class="spec-value">24 Months</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">STORAGE:</div>
+                            <div class="spec-value">Cool, Dry</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">ALLERGENS:</div>
+                            <div class="spec-value">None Declared</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">CLASSIFICATION:</div>
+                            <div class="spec-value">Declassified</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">FIELD TESTED:</div>
+                            <div class="spec-value">847 Kitchens</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Deployment Instructions -->
             <div class="section">
-                <div class="section-header">II. DEPLOYMENT INSTRUCTIONS</div>
+                <div class="section-header">III. DEPLOYMENT INSTRUCTIONS</div>
                 <div class="section-content">
-                    <p><strong>BASIC DEPLOYMENT:</strong> Apply directly to target food items during or after cooking process. Recommended deployment rate: 1/4 teaspoon per standard protein serving.</p>
+                    <p><strong>BASIC DEPLOYMENT:</strong> Apply liberally to target protein before cooking operation. Effective with all cooking methods: grilling, roasting, sautéing, and air-frying.</p>
                     
-                    <p><strong>ADVANCED APPLICATIONS:</strong> Refer to Field Manual FM-RATIONS-001 for comprehensive tactical deployment procedures, including specialized techniques for various food categories and operational environments.</p>
+                    <p><strong>ADVANCED TACTICS:</strong> Mix with olive oil for marinades. Combine with butter for compound enhancement. Sprinkle on vegetables for morale-boosting side operations.</p>
                     
-                    <p><strong>STORAGE PROTOCOLS:</strong> Maintain container seal integrity between deployments. Store in cool, dry environment away from direct sunlight to preserve tactical effectiveness.</p>
+                    <p><strong>FIELD NOTES:</strong> Particularly effective on chicken, beef, pork, fish, roasted vegetables, and potato operations. Has been known to make civilians request recipes.</p>
+                    
+                    <p><strong>WARNING:</strong> May cause excessive satisfaction and repeat procurement requests. Use responsibly.</p>
                 </div>
             </div>
 
-            <!-- Order Information -->
-            <div class="order-section">
-                <h3 style="color: #4a5d3a; margin-bottom: 1rem; font-family: 'Courier Prime', monospace; letter-spacing: 2px;">PROCUREMENT DETAILS</h3>
-                <div class="price-display">$14.95</div>
-                <p style="margin-bottom: 1rem; color: #2d2d1f;">Includes standard shipping to continental United States. International deployment available upon request.</p>
-                <button class="order-button">INITIATE PROCUREMENT</button>
-                <p style="margin-top: 1rem; font-size: 0.9rem; color: #6b7a5b;">30-day satisfaction guarantee. Quality assured or full refund authorized.</p>
+            <!-- Order Section -->
+            <div class="section">
+                <div class="section-header">IV. PROCUREMENT</div>
+                <div class="order-section">
+                    <div class="price-display">$9.95</div>
+                    <p>Standard Issue Container (4oz)</p>
+                    <p style="margin: 1rem 0; font-size: 0.9rem; color: #666;">
+                        Includes tactical deployment instructions and field manual access
+                    </p>
+                    <button class="order-button" onclick="alert('Order system coming soon - Mission Brief contains contact info')">
+                        REQUISITION NOW
+                    </button>
+                    <p style="margin-top: 1rem; font-size: 0.8rem; color: #666;">
+                        Shipping available to all civilian sectors
+                    </p>
+                </div>
+            </div>
+
+            <!-- Mission Status -->
+            <div class="section">
+                <div class="section-header">V. MISSION STATUS</div>
+                <div class="section-content">
+                    <div style="text-align: center; border: 2px solid #4a5d3a; padding: 2rem; background: rgba(74, 93, 58, 0.1);">
+                        <div style="font-weight: bold; font-size: 1.3rem; margin-bottom: 1rem; color: #4a5d3a;">
+                            DEPLOYMENT AUTHORIZED
+                        </div>
+                        <p>Operation Flavor Superiority is active. Civilian procurement approved for immediate distribution.</p>
+                        <div style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+                            Authorization Code: SUPPLY-DEPOT-ACTIVE-2025
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById('mobile-nav');
+            if (mobileNav) {
+                mobileNav.classList.toggle('show');
+            }
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileNav = document.getElementById('mobile-nav');
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            
+            if (mobileNav && menuToggle && event.target instanceof Node) {
+                if (!mobileNav.contains(event.target) && !menuToggle.contains(event.target)) {
+                    mobileNav.classList.remove('show');
+                }
+            }
+        });
+
+        // Close mobile menu when window is resized to desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                const mobileNav = document.getElementById('mobile-nav');
+                if (mobileNav) {
+                    mobileNav.classList.remove('show');
+                }
+            }
+        });
+    </script>
 </body>
 </html>
