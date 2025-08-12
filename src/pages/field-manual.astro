@@ -20,10 +20,10 @@
         body {
             font-family: 'Special Elite', 'Courier New', monospace;
             background: 
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23d4c19e"/><g opacity="0.1"><circle cx="10" cy="10" r="1" fill="%23666"/><circle cx="30" cy="20" r="0.8" fill="%23666"/><circle cx="50" cy="30" r="1.2" fill="%23666"/><circle cx="70" cy="40" r="0.9" fill="%23666"/><circle cx="90" cy="50" r="1.1" fill="%23666"/></g></svg>') repeat,
-                linear-gradient(135deg, #d4c19e 25%, transparent 25%),
-                linear-gradient(-135deg, #d4c19e 25%, transparent 25%);
-            background-size: 180px 180px, 25px 25px, 25px 25px;
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23d4c19e"/><g opacity="0.1"><line x1="0" y1="10" x2="100" y2="10" stroke="%23333" stroke-width="0.5"/><line x1="0" y1="20" x2="100" y2="20" stroke="%23333" stroke-width="0.5"/><line x1="0" y1="30" x2="100" y2="30" stroke="%23333" stroke-width="0.5"/><line x1="0" y1="40" x2="100" y2="40" stroke="%23333" stroke-width="0.5"/><line x1="0" y1="50" x2="100" y2="50" stroke="%23333" stroke-width="0.5"/></g></svg>') repeat,
+                linear-gradient(45deg, #d4c19e 25%, transparent 25%),
+                linear-gradient(-45deg, #d4c19e 25%, transparent 25%);
+            background-size: 200px 200px, 30px 30px, 30px 30px;
             color: #2d2d1f;
             min-height: 100vh;
             overflow-x: hidden;
@@ -60,6 +60,14 @@
             border: 2px solid #8FBC8F;
             padding: 8px 16px;
             background: rgba(0,0,0,0.2);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            color: #d4c19e;
+            border-color: #d4c19e;
+            background: rgba(212, 193, 158, 0.1);
         }
 
         .nav-links {
@@ -87,81 +95,49 @@
             text-shadow: 0 0 5px rgba(143, 188, 143, 0.5);
         }
 
-        /* Manual Container */
-        .manual-container {
-            max-width: 1000px;
+        /* Document Container */
+        .document-container {
+            max-width: 900px;
             margin: 2rem auto;
             padding: 0 2rem;
         }
 
-        .manual-cover {
-            background: 
-                linear-gradient(135deg, rgba(74, 93, 58, 0.9) 0%, rgba(45, 45, 31, 0.9) 100%),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%234a5d3a"/><g opacity="0.2"><rect x="10" y="10" width="80" height="2" fill="%23333"/><rect x="10" y="20" width="80" height="2" fill="%23333"/><rect x="10" y="80" width="80" height="2" fill="%23333"/><rect x="10" y="90" width="80" height="2" fill="%23333"/></g></svg>');
-            color: #d4c19e;
-            padding: 4rem 3rem;
+        .classified-header {
+            background: #2d2d1f;
+            color: #ff6b6b;
+            padding: 1rem;
             text-align: center;
-            border: 4px solid #8a7a5a;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-            margin-bottom: 3rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            border: 3px solid #ff6b6b;
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.4);
+            margin-bottom: 2rem;
             position: relative;
         }
 
-        .manual-cover::before {
-            content: '';
+        .classified-header::before {
+            content: '⚡';
             position: absolute;
-            top: 20px;
             left: 20px;
-            right: 20px;
-            bottom: 20px;
-            border: 2px solid #6a5a3a;
-            pointer-events: none;
-        }
-
-        .cover-title {
-            font-size: 3rem;
-            color: #8FBC8F;
-            margin-bottom: 1rem;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
-            letter-spacing: 5px;
-            font-weight: bold;
-        }
-
-        .cover-subtitle {
+            top: 50%;
+            transform: translateY(-50%);
             font-size: 1.5rem;
-            margin-bottom: 2rem;
-            letter-spacing: 3px;
-            color: #d4c19e;
         }
 
-        .field-manual-id {
-            font-family: 'Courier Prime', monospace;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            background: rgba(0,0,0,0.3);
-            padding: 0.5rem;
-            border: 1px solid #8a7a5a;
-        }
-
-        .classification-stamp {
+        .classified-header::after {
+            content: '⚡';
             position: absolute;
-            top: 30px;
-            right: 30px;
-            background: #ff6b6b;
-            color: white;
-            padding: 8px 15px;
-            font-weight: bold;
-            transform: rotate(15deg);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            box-shadow: 3px 3px 8px rgba(0,0,0,0.4);
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
         }
 
-        /* Manual Pages */
-        .manual-page {
+        /* Document Pages */
+        .document-page {
             background: 
                 linear-gradient(to bottom, rgba(212, 193, 158, 0.95), rgba(196, 176, 148, 0.95)),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23d4c19e"/><g opacity="0.08"><line x1="0" y1="8" x2="100" y2="8" stroke="%23000" stroke-width="0.5"/><line x1="0" y1="16" x2="100" y2="16" stroke="%23000" stroke-width="0.5"/><line x1="0" y1="24" x2="100" y2="24" stroke="%23000" stroke-width="0.5"/></g></svg>');
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23d4c19e"/><g opacity="0.05"><line x1="0" y1="10" x2="100" y2="10" stroke="%23000" stroke-width="0.5"/><line x1="0" y1="20" x2="100" y2="20" stroke="%23000" stroke-width="0.5"/><line x1="0" y1="30" x2="100" y2="30" stroke="%23000" stroke-width="0.5"/></g></svg>');
             border: 3px solid #8a7a5a;
             padding: 3rem;
             margin-bottom: 3rem;
@@ -169,7 +145,7 @@
             position: relative;
         }
 
-        .manual-page::before {
+        .document-page::before {
             content: '';
             position: absolute;
             top: 15px;
@@ -180,47 +156,112 @@
             pointer-events: none;
         }
 
-        .page-number {
-            position: absolute;
-            bottom: 10px;
-            right: 20px;
-            font-family: 'Courier Prime', monospace;
-            color: #6a5a3a;
-            font-size: 0.9rem;
+        .page-header {
+            text-align: center;
+            border-bottom: 2px solid #4a5d3a;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
         }
 
-        .chapter-header {
+        .doc-title {
+            font-size: 2.2rem;
+            color: #2d2d1f;
+            letter-spacing: 4px;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .doc-subtitle {
+            color: #6b7a5b;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+        }
+
+        .doc-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+            font-family: 'Courier Prime', monospace;
+        }
+
+        .info-item {
+            background: rgba(255,255,255,0.3);
+            padding: 0.5rem;
+            border: 1px solid #8a7a5a;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #4a5d3a;
+        }
+
+        /* Content Sections */
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
             background: rgba(74, 93, 58, 0.8);
             color: #d4c19e;
-            padding: 1rem 1.5rem;
-            font-size: 1.4rem;
+            padding: 0.8rem 1rem;
+            font-size: 1.3rem;
             font-weight: bold;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 2rem;
-            border-left: 6px solid #8FBC8F;
-            position: relative;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #8FBC8F;
         }
 
-        .chapter-header::before {
-            content: attr(data-chapter);
-            position: absolute;
-            left: -30px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: #4a5d3a;
-            color: white;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
+        .section-content {
+            line-height: 1.8;
+            color: #2d2d1f;
+            font-size: 1.1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: rgba(255,255,255,0.4);
+            border: 2px solid #8a7a5a;
+            padding: 1.5rem;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .toc-header {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #4a5d3a;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            font-family: 'Courier Prime', monospace;
+        }
+
+        .toc-item {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px dotted #8a7a5a;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .toc-item:hover {
+            color: #4a5d3a;
             font-weight: bold;
         }
 
-        /* Mission Protocols (Recipes) */
+        /* Mission Protocols */
         .mission-protocol {
             background: rgba(255,255,255,0.4);
             border: 2px solid #8a7a5a;
@@ -280,12 +321,12 @@
             font-size: 0.9rem;
         }
 
-        /* Equipment and Ingredients */
-        .equipment-list, .ingredient-list {
-            background: rgba(143, 188, 143, 0.1);
-            border: 1px solid #8FBC8F;
+        /* Equipment Lists */
+        .equipment-list {
+            background: rgba(143, 188, 143, 0.2);
+            border: 2px solid #8FBC8F;
             padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            margin: 1.5rem 0;
         }
 
         .list-header {
@@ -294,158 +335,90 @@
             margin-bottom: 1rem;
             font-size: 1.1rem;
             letter-spacing: 1px;
-            text-transform: uppercase;
         }
 
-        .equipment-list ul, .ingredient-list ul {
+        .equipment-list ul {
             list-style: none;
             padding: 0;
         }
 
-        .equipment-list li, .ingredient-list li {
-            padding: 0.3rem 0;
-            border-bottom: 1px dotted #8a7a5a;
+        .equipment-list li {
+            padding: 0.5rem 0;
             color: #2d2d1f;
         }
 
         .equipment-list li::before {
-            content: '🔧 ';
-            margin-right: 0.5rem;
-        }
-
-        .ingredient-list li::before {
-            content: '📦 ';
+            content: '• ';
+            color: #4a5d3a;
+            font-weight: bold;
             margin-right: 0.5rem;
         }
 
         /* Deployment Steps */
         .deployment-steps {
-            counter-reset: step-counter;
+            margin-top: 1.5rem;
         }
 
         .step {
             background: rgba(255,255,255,0.3);
-            border: 1px solid #8a7a5a;
-            padding: 1.5rem;
+            border-left: 4px solid #4a5d3a;
+            padding: 1rem;
             margin-bottom: 1rem;
-            border-left: 5px solid #4a5d3a;
-            position: relative;
-        }
-
-        .step::before {
-            content: 'STEP ' counter(step-counter);
-            counter-increment: step-counter;
-            position: absolute;
-            left: -5px;
-            top: -10px;
-            background: #4a5d3a;
-            color: white;
-            padding: 3px 10px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            letter-spacing: 1px;
         }
 
         .step-content {
-            line-height: 1.7;
             color: #2d2d1f;
-            margin-top: 0.5rem;
+            line-height: 1.6;
         }
 
         /* Warning Boxes */
         .warning-box {
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 140, 0, 0.1));
+            background: rgba(255, 107, 107, 0.2);
             border: 2px solid #ff6b6b;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            position: relative;
-        }
-
-        .warning-box::before {
-            content: '⚠️ CAUTION';
-            position: absolute;
-            top: -10px;
-            left: 15px;
-            background: #ff6b6b;
-            color: white;
-            padding: 3px 10px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .warning-content {
-            margin-top: 0.5rem;
-            color: #2d2d1f;
-            font-weight: bold;
-        }
-
-        /* Success Indicators */
-        .success-indicators {
-            background: rgba(143, 188, 143, 0.2);
-            border: 2px solid #8FBC8F;
             padding: 1.5rem;
             margin-top: 2rem;
         }
 
-        .success-header {
-            font-weight: bold;
-            color: #4a5d3a;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-        }
-
-        .indicator-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .indicator-list li {
-            padding: 0.5rem 0;
+        .warning-content {
             color: #2d2d1f;
+            font-weight: bold;
         }
 
-        .indicator-list li::before {
-            content: '✅ ';
-            margin-right: 0.5rem;
-        }
-
-        /* Table of Contents */
-        .toc {
-            background: rgba(0,0,0,0.1);
-            border: 2px solid #8a7a5a;
-            padding: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .toc-header {
+        /* Page Numbers */
+        .page-number {
             text-align: center;
-            font-size: 1.5rem;
-            color: #4a5d3a;
-            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #8a7a5a;
+            font-family: 'Courier Prime', monospace;
+            color: #6b7a5b;
+            font-size: 0.9rem;
+        }
+
+        /* Stamps */
+        .document-stamps {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+
+        .stamp {
+            position: absolute;
+            background: rgba(255, 0, 0, 0.6);
+            color: white;
+            padding: 5px 10px;
             font-weight: bold;
-            letter-spacing: 2px;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
         }
 
-        .toc-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .toc-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px dotted #8a7a5a;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .toc-item:hover {
-            color: #4a5d3a;
-            font-weight: bold;
-        }
+        .stamp-1 { top: 30px; right: 30px; transform: rotate(-12deg); }
+        .stamp-2 { bottom: 30px; left: 30px; transform: rotate(8deg); background: rgba(0, 100, 0, 0.6); }
+        .stamp-3 { top: 50%; left: 20px; transform: translateY(-50%) rotate(-90deg); background: rgba(0, 0, 255, 0.6); }
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -459,17 +432,21 @@
                 gap: 1rem;
             }
 
-            .manual-container {
+            .document-container {
                 padding: 0 1rem;
             }
 
-            .manual-cover, .manual-page {
+            .document-page {
                 padding: 2rem 1.5rem;
             }
 
-            .cover-title {
-                font-size: 2rem;
-                letter-spacing: 3px;
+            .doc-title {
+                font-size: 1.8rem;
+                letter-spacing: 2px;
+            }
+
+            .doc-info {
+                grid-template-columns: 1fr;
             }
 
             .mission-specs {
@@ -488,34 +465,65 @@
     <!-- Navigation -->
     <nav class="nav-container">
         <div class="nav-content">
-            <div class="logo">RATIONS</div>
+            <a href="/supply-depot" class="logo">RATIONS</a>
             <ul class="nav-links">
                 <li><a href="/supply-depot">Supply Depot</a></li>
                 <li><a href="/mission-brief">Mission Brief</a></li>
-                <li><a href="/merchandise">Merchandise</a></li>
+                <li><a href="/merchandise">Surplus Gear</a></li>
                 <li><a href="/field-manual" class="active">Field Manual</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="manual-container">
-        <!-- Manual Cover -->
-        <div class="manual-cover">
-            <div class="classification-stamp">UNCLASSIFIED</div>
-            <h1 class="cover-title">FIELD MANUAL</h1>
-            <p class="cover-subtitle">STANDARD ISSUE DEPLOYMENT PROCEDURES</p>
-            <div class="field-manual-id">
-                DOCUMENT NO: FM-RATIONS-001<br>
-                REVISION: 2025.01<br>
-                CLASSIFICATION: UNCLASSIFIED
+    <div class="document-container">
+        <!-- Classification Header -->
+        <div class="classified-header">
+            DECLASSIFIED - FIELD MANUAL FM-RATIONS-001
+        </div>
+
+        <!-- Field Manual Cover -->
+        <div class="document-page">
+            <div class="document-stamps">
+                <div class="stamp stamp-1">APPROVED</div>
+                <div class="stamp stamp-2">ACTIVE</div>
+                <div class="stamp stamp-3">CURRENT</div>
             </div>
-            <p style="margin-top: 2rem; font-size: 1.1rem;">
-                TACTICAL SEASONING PROTOCOLS FOR FIELD OPERATIONS
-            </p>
+
+            <div class="page-header">
+                <h1 class="doc-title">FIELD MANUAL</h1>
+                <p class="doc-subtitle">STANDARD ISSUE DEPLOYMENT PROCEDURES</p>
+            </div>
+
+            <div class="doc-info">
+                <div class="info-item">
+                    <div class="info-label">DOCUMENT NO:</div>
+                    <div>FM-RATIONS-001</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">REVISION:</div>
+                    <div>2025.01</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">CLASSIFICATION:</div>
+                    <div>DECLASSIFIED</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">DISTRIBUTION:</div>
+                    <div>UNLIMITED</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-content">
+                    <p style="text-align: center; font-size: 1.2rem; margin: 2rem 0;">
+                        <strong>TACTICAL SEASONING PROTOCOLS FOR FIELD OPERATIONS</strong>
+                    </p>
+                </div>
+            </div>
         </div>
 
         <!-- Table of Contents -->
-        <div class="manual-page">
+        <div class="document-page">
             <div class="toc">
                 <div class="toc-header">TABLE OF CONTENTS</div>
                 <ul class="toc-list">
@@ -545,269 +553,94 @@
         </div>
 
         <!-- Chapter 1: Basic Deployment -->
-        <div class="manual-page">
-            <div class="chapter-header" data-chapter="1">Basic Deployment Procedures</div>
-            
-            <div class="mission-protocol">
-                <div class="protocol-header">
-                    <div class="protocol-name">STANDARD DEPLOYMENT</div>
-                    <div class="protocol-code">PROTOCOL-001</div>
-                </div>
+        <div class="document-page">
+            <div class="section">
+                <div class="section-header">CHAPTER 1: BASIC DEPLOYMENT PROCEDURES</div>
+                
+                <div class="mission-protocol">
+                    <div class="protocol-header">
+                        <div class="protocol-name">STANDARD DEPLOYMENT</div>
+                        <div class="protocol-code">PROTOCOL-001</div>
+                    </div>
 
-                <div class="mission-specs">
-                    <div class="spec-item">
-                        <div class="spec-label">DIFFICULTY:</div>
-                        <div class="spec-value">BASIC</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-label">TIME:</div>
-                        <div class="spec-value">2-5 MINUTES</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-label">PERSONNEL:</div>
-                        <div class="spec-value">1 OPERATOR</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-label">RANGE:</div>
-                        <div class="spec-value">ALL FOODS</div>
-                    </div>
-                </div>
-
-                <div class="equipment-list">
-                    <div class="list-header">Required Equipment</div>
-                    <ul>
-                        <li>1x STANDARD ISSUE Tactical Seasoning (Primary)</li>
-                        <li>Standard cooking implements</li>
-                        <li>Target food item (any protein, vegetable, or grain)</li>
-                        <li>Optional: measuring spoon for precision deployment</li>
-                    </ul>
-                </div>
-
-                <div class="deployment-steps">
-                    <div class="step">
-                        <div class="step-content">
-                            <strong>ASSESSMENT PHASE:</strong> Identify target food item and assess current flavor deficiency level. Determine optimal STANDARD ISSUE deployment quantity based on food mass and desired flavor intensity.
+                    <div class="mission-specs">
+                        <div class="spec-item">
+                            <div class="spec-label">DIFFICULTY:</div>
+                            <div class="spec-value">BASIC</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">TIME:</div>
+                            <div class="spec-value">2-5 MINUTES</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">PERSONNEL:</div>
+                            <div class="spec-value">1 OPERATOR</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">RANGE:</div>
+                            <div class="spec-value">ALL FOODS</div>
                         </div>
                     </div>
-                    
-                    <div class="step">
-                        <div class="step-content">
-                            <strong>PREPARATION:</strong> Ensure STANDARD ISSUE container is properly sealed and contents are evenly distributed. Shake container 2-3 times if settling has occurred during transport.
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-content">
-                            <strong>DEPLOYMENT:</strong> Apply STANDARD ISSUE evenly across target surface. For optimal results, deploy during cooking process when food surface is slightly moist to ensure proper adhesion.
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-content">
-                            <strong>INTEGRATION:</strong> Allow 30-60 seconds for flavor integration. If deploying on hot surfaces, integration occurs automatically. For cold applications, manual mixing may be required.
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-content">
-                            <strong>VERIFICATION:</strong> Conduct taste test to verify successful flavor enhancement. If additional intensity required, repeat deployment in small increments until optimal flavor achieved.
-                        </div>
-                    </div>
-                </div>
 
-                <div class="warning-box">
-                    <div class="warning-content">
-                        Start with minimal deployment. STANDARD ISSUE is highly concentrated. Excessive deployment may result in flavor overload. Remember: You can always add more, but you cannot remove.
+                    <div class="equipment-list">
+                        <div class="list-header">Required Equipment</div>
+                        <ul>
+                            <li>1x STANDARD ISSUE Tactical Seasoning (Primary)</li>
+                            <li>Standard cooking implements</li>
+                            <li>Target food item (any protein, vegetable, or grain)</li>
+                            <li>Optional: measuring spoon for precision deployment</li>
+                        </ul>
                     </div>
-                </div>
 
-                <div class="success-indicators">
-                    <div class="success-header">Mission Success Indicators:</div>
-                    <ul class="indicator-list">
-                        <li>Enhanced aroma immediately detectable</li>
-                        <li>Visible improvement in food coloration</li>
-                        <li>Increased craving intensity</li>
-                        <li>Improved overall meal satisfaction</li>
-                    </ul>
+                    <div class="deployment-steps">
+                        <div class="step">
+                            <div class="step-content">
+                                <strong>ASSESSMENT PHASE:</strong> Identify target food item and assess current flavor deficiency level. Determine optimal STANDARD ISSUE deployment quantity based on food mass and desired flavor intensity.
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-content">
+                                <strong>PREPARATION:</strong> Ensure STANDARD ISSUE container is properly sealed and contents are evenly distributed. Shake container 2-3 times if settling has occurred during transport.
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-content">
+                                <strong>DEPLOYMENT:</strong> Apply STANDARD ISSUE directly to target food surface using controlled dispersion technique. For solid foods, deploy during final cooking phase. For liquids, integrate during stirring operations.
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-content">
+                                <strong>VERIFICATION:</strong> Conduct taste assessment to confirm successful flavor integration. If additional enhancement required, deploy secondary application using reduced quantity.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <div class="warning-content">
+                            WARNING: Over-deployment may result in excessive flavor intensity. Start with minimal quantities and increase as needed. Refer to troubleshooting guide for remediation procedures.
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="page-number">PAGE 003</div>
         </div>
 
-        <!-- Chapter 2: Protein Protocols -->
-        <div class="manual-page">
-            <div class="chapter-header" data-chapter="2">Protein Enhancement Protocols</div>
-            
-            <div class="mission-protocol">
-                <div class="protocol-header">
-                    <div class="protocol-name">OPERATION PROTEIN SUPERIORITY</div>
-                    <div class="protocol-code">PROTOCOL-201</div>
-                </div>
-
-                <div class="mission-specs">
-                    <div class="spec-item">
-                        <div class="spec-label">TARGET:</div>
-                        <div class="spec-value">ALL PROTEINS</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-label">EFFECTIVENESS:</div>
-                        <div class="spec-value">95% SUCCESS</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-label">DEPLOYMENT:</div>
-                        <div class="spec-value">PRE/DURING COOK</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-label">COVERAGE:</div>
-                        <div class="spec-value">FULL SURFACE</div>
-                    </div>
-                </div>
-
-                <div class="ingredient-list">
-                    <div class="list-header">Recommended Protein Targets</div>
-                    <ul>
-                        <li>Chicken (all cuts) - Deploy before grilling or roasting</li>
-                        <li>Beef steaks - Apply 15 minutes before cooking</li>
-                        <li>Pork chops - Excellent for pan-searing operations</li>
-                        <li>Fish fillets - Light deployment recommended</li>
-                        <li>Tofu/Tempeh - Heavy deployment for maximum impact</li>
-                    </ul>
-                </div>
-
-                <div class="deployment-steps">
-                    <div class="step">
-                        <div class="step-content">
-                            <strong>PRE-DEPLOYMENT PREP:</strong> Remove protein from refrigeration 10-15 minutes before seasoning to reach optimal temperature for STANDARD ISSUE absorption.
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-content">
-                            <strong>SURFACE PREPARATION:</strong> Pat protein completely dry with paper towels. Moisture on surface will interfere with proper STANDARD ISSUE adhesion and penetration.
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-content">
-                            <strong>TACTICAL APPLICATION:</strong> Apply STANDARD ISSUE in even coating across all exposed surfaces. Use approximately 1/2 teaspoon per pound of protein as baseline deployment rate.
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-content">
-                            <strong>PENETRATION PHASE:</strong> Allow 5-15 minutes for STANDARD ISSUE to penetrate protein surface. Thicker cuts require longer penetration time for optimal flavor distribution.
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-content">
-                            <strong>COOKING DEPLOYMENT:</strong> Proceed with standard cooking procedures. STANDARD ISSUE will activate and intensify during heat application, creating superior flavor development.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="warning-box">
-                    <div class="warning-content">
-                        For fish and delicate proteins, use 50% standard deployment rate. STANDARD ISSUE potency can overwhelm subtle protein flavors if over-applied.
-                    </div>
-                </div>
-            </div>
-            <div class="page-number">PAGE 005</div>
-        </div>
-
-        <!-- Chapter 3: Vegetable Operations -->
-        <div class="manual-page">
-            <div class="chapter-header" data-chapter="3">Vegetable Operations</div>
-            
-            <div class="mission-protocol">
-                <div class="protocol-header">
-                    <div class="protocol-name">VEGETABLE TRANSFORMATION PROTOCOL</div>
-                    <div class="protocol-code">PROTOCOL-301</div>
-                </div>
-
-                <div class="mission-specs">
-                    <div class="spec-item">
-                        <div class="spec-label">MISSION:</div>
-                        <div class="spec-value">VEGGIE RESCUE</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-label">OBJECTIVE:</div>
-                        <div class="spec-value">FLAVOR BOOST</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-label">METHOD:</div>
-                        <div class="spec-value">MULTI-VECTOR</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-label">SUCCESS RATE:</div>
-                        <div class="spec-value">98%</div>
-                    </div>
-                </div>
-
-                <div class="deployment-steps">
-                    <div class="step">
-                        <div class="step-content">
-                            <strong>ROASTED VEGETABLE DEPLOYMENT:</strong> Toss cut vegetables with light oil coating. Deploy STANDARD ISSUE at 1/4 teaspoon per cup of vegetables. Roast at 425°F until caramelized. STANDARD ISSUE will create enhanced browning and flavor concentration.
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-content">
-                            <strong>STEAMED VEGETABLE PROTOCOL:</strong> Steam vegetables until 80% cooked. Remove from heat, add small amount of butter or oil, then deploy STANDARD ISSUE while vegetables are still hot. Toss to distribute. Residual heat will activate seasoning.
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-content">
-                            <strong>SAUTÉED VEGETABLE OPERATION:</strong> Heat pan with oil/butter. Add vegetables and cook until almost tender. Deploy STANDARD ISSUE in final 30 seconds of cooking. This prevents burning while ensuring full flavor integration.
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-content">
-                            <strong>RAW VEGETABLE ENHANCEMENT:</strong> For salads and cold applications, mix STANDARD ISSUE with oil or dressing before applying to vegetables. This ensures even distribution and prevents clumping on raw surfaces.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="success-indicators">
-                    <div class="success-header">Vegetable Mission Success Markers:</div>
-                    <ul class="indicator-list">
-                        <li>Previously disliked vegetables become palatable</li>
-                        <li>Natural vegetable sweetness enhanced</li>
-                        <li>Desire for additional vegetable servings increased</li>
-                        <li>Children voluntarily request vegetables</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="page-number">PAGE 008</div>
-        </div>
-
         <!-- Chapter 4: Advanced Applications -->
-        <div class="manual-page">
-            <div class="chapter-header" data-chapter="4">Advanced Tactical Applications</div>
-            
-            <div class="mission-protocol">
-                <div class="protocol-header">
-                    <div class="protocol-name">SPECIAL OPERATIONS DEPLOYMENT</div>
-                    <div class="protocol-code">PROTOCOL-401</div>
-                </div>
-
-                <div class="ingredient-list">
-                    <div class="list-header">Advanced Mission Types</div>
-                    <ul>
-                        <li>RICE ENHANCEMENT - Deploy during final cooking phase</li>
-                        <li>PASTA WATER INFUSION - Add to boiling water for system-wide flavor</li>
-                        <li>SOUP BASE AMPLIFICATION - Deploy in oil before adding liquids</li>
-                        <li>MARINADE FORCE MULTIPLICATION - Combine with acids for penetration</li>
-                        <li>BREAD CRUST OPERATIONS - Mix with oil for tactical bread coating</li>
-                    </ul>
+        <div class="document-page">
+            <div class="section">
+                <div class="section-header">CHAPTER 4: ADVANCED TACTICAL APPLICATIONS</div>
+                
+                <div class="section-content">
+                    <p>The following procedures require mastery of basic deployment techniques and should only be attempted by experienced operators.</p>
                 </div>
 
                 <div class="deployment-steps">
                     <div class="step">
                         <div class="step-content">
-                            <strong>COMPOUND BUTTER PROTOCOL:</strong> Mix 1 teaspoon STANDARD ISSUE with 1/2 cup softened butter. Form into log and refrigerate. Deploy on hot foods for immediate flavor release and extended flavor duration.
+                            <strong>COMPOUND BUTTER OPERATION:</strong> Mix STANDARD ISSUE with softened butter (4:1 ratio). Form into log and refrigerate. Deploy on hot foods for immediate flavor release and extended flavor duration.
                         </div>
                     </div>
                     
@@ -834,38 +667,40 @@
         </div>
 
         <!-- Troubleshooting Guide -->
-        <div class="manual-page">
-            <div class="chapter-header" data-chapter="A">Troubleshooting Guide</div>
-            
-            <div style="background: rgba(255,255,255,0.4); border: 2px solid #8a7a5a; padding: 2rem;">
-                <h3 style="color: #4a5d3a; margin-bottom: 1.5rem; font-size: 1.3rem;">Common Field Issues and Solutions</h3>
+        <div class="document-page">
+            <div class="section">
+                <div class="section-header">APPENDIX A: TROUBLESHOOTING GUIDE</div>
                 
-                <div style="margin-bottom: 2rem;">
-                    <strong style="color: #4a5d3a;">ISSUE:</strong> Bland flavor after deployment<br>
-                    <strong style="color: #2d2d1f;">SOLUTION:</strong> Increase deployment quantity. STANDARD ISSUE concentration may require higher application rate for desired intensity.
-                </div>
-                
-                <div style="margin-bottom: 2rem;">
-                    <strong style="color: #4a5d3a;">ISSUE:</strong> Uneven flavor distribution<br>
-                    <strong style="color: #2d2d1f;">SOLUTION:</strong> Ensure proper mixing during deployment. Use oil or moisture to aid distribution across target surface.
-                </div>
-                
-                <div style="margin-bottom: 2rem;">
-                    <strong style="color: #4a5d3a;">ISSUE:</strong> Overpowering flavor intensity<br>
-                    <strong style="color: #2d2d1f;">SOLUTION:</strong> Dilute with additional unseasoned food. Add acid (lemon, vinegar) to balance. Reduce deployment rate in future operations.
-                </div>
-                
-                <div style="margin-bottom: 2rem;">
-                    <strong style="color: #4a5d3a;">ISSUE:</strong> Clumping during application<br>
-                    <strong style="color: #2d2d1f;">SOLUTION:</strong> Ensure container is properly sealed and stored in dry conditions. Shake container before each deployment to prevent settling.
-                </div>
-                
-                <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #8a7a5a;">
-                    <p style="color: #4a5d3a; font-weight: bold; font-size: 1.1rem;">
-                        END OF MANUAL<br>
-                        CLASSIFICATION: UNCLASSIFIED<br>
-                        DISTRIBUTION: UNLIMITED
-                    </p>
+                <div style="background: rgba(255,255,255,0.4); border: 2px solid #8a7a5a; padding: 2rem;">
+                    <h3 style="color: #4a5d3a; margin-bottom: 1.5rem; font-size: 1.3rem;">Common Field Issues and Solutions</h3>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <strong style="color: #4a5d3a;">ISSUE:</strong> Bland flavor after deployment<br>
+                        <strong style="color: #2d2d1f;">SOLUTION:</strong> Increase deployment quantity. STANDARD ISSUE concentration may require higher application rate for desired intensity.
+                    </div>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <strong style="color: #4a5d3a;">ISSUE:</strong> Uneven flavor distribution<br>
+                        <strong style="color: #2d2d1f;">SOLUTION:</strong> Ensure proper mixing during deployment. Use oil or moisture to aid distribution across target surface.
+                    </div>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <strong style="color: #4a5d3a;">ISSUE:</strong> Overpowering flavor intensity<br>
+                        <strong style="color: #2d2d1f;">SOLUTION:</strong> Dilute with additional unseasoned food. Add acid (lemon, vinegar) to balance. Reduce deployment rate in future operations.
+                    </div>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <strong style="color: #4a5d3a;">ISSUE:</strong> Clumping during application<br>
+                        <strong style="color: #2d2d1f;">SOLUTION:</strong> Ensure container is properly sealed and stored in dry conditions. Shake container before each deployment to prevent settling.
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #8a7a5a;">
+                        <p style="color: #4a5d3a; font-weight: bold; font-size: 1.1rem;">
+                            END OF MANUAL<br>
+                            CLASSIFICATION: DECLASSIFIED<br>
+                            DISTRIBUTION: UNLIMITED
+                        </p>
+                    </div>
                 </div>
             </div>
             <div class="page-number">PAGE 015</div>
