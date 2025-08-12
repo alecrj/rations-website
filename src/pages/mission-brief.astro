@@ -243,6 +243,12 @@
             transform: rotate(15deg);
         }
 
+        .personnel-file.declassified::before {
+            content: 'DECLASSIFIED';
+            background: #4a5d3a;
+            color: white;
+        }
+
         .personnel-name {
             font-size: 1.3rem;
             color: #4a5d3a;
@@ -268,6 +274,7 @@
         .objectives-list {
             list-style: none;
             padding: 0;
+            counter-reset: objective-counter;
         }
 
         .objective-item {
@@ -296,10 +303,6 @@
             justify-content: center;
             font-size: 0.8rem;
             font-weight: bold;
-        }
-
-        .objectives-list {
-            counter-reset: objective-counter;
         }
 
         /* Stamps and Seals */
@@ -456,35 +459,35 @@
             </div>
 
             <div class="personnel-grid">
-                <div class="personnel-file">
-                    <div class="personnel-name">COL. JAMES "SPICE" MARTINEZ</div>
-                    <div class="personnel-rank">COMMANDING OFFICER - FLAVOR OPERATIONS</div>
+                <div class="personnel-file declassified">
+                    <div class="personnel-name">MAJ. MIKE "FORMULA" RODRIGUEZ</div>
+                    <div class="personnel-rank">CHIEF RESEARCH OFFICER - FLAVOR DEVELOPMENT</div>
                     <div class="personnel-bio">
-                        20-year veteran of military food service. Developed revolutionary K-ration enhancement protocols during Operation Desert Storm. Led the team that created the STANDARD ISSUE formula. Specializes in field-tested flavor combinations under extreme conditions.
+                        The mastermind behind STANDARD ISSUE. 15-year veteran of military R&D with classified experience in biochemical flavor enhancement. Rodriguez personally engineered the proprietary spice matrix that makes STANDARD ISSUE tactically superior to civilian seasonings. His legendary palate can detect flavor deficiencies at the molecular level.
                     </div>
                 </div>
 
-                <div class="personnel-file">
-                    <div class="personnel-name">MAJ. SARAH "CHEF" THOMPSON</div>
-                    <div class="personnel-rank">HEAD OF RESEARCH & DEVELOPMENT</div>
+                <div class="personnel-file declassified">
+                    <div class="personnel-name">CPT. JEN "PRECISION" GUTEKUNST</div>
+                    <div class="personnel-rank">TACTICAL OPERATIONS SPECIALIST</div>
                     <div class="personnel-bio">
-                        Former CIA culinary operative with extensive experience in international flavor intelligence. Holds classified clearance for exotic spice procurement. Responsible for the secret ingredient matrix that makes STANDARD ISSUE tactically superior.
+                        Elite field operative specializing in covert culinary missions. Gutekunst's surgical precision in seasoning deployment has earned her legendary status among special forces cooking units. Responsible for developing the exact measurement protocols that ensure consistent STANDARD ISSUE performance across all operational environments.
                     </div>
                 </div>
 
-                <div class="personnel-file">
-                    <div class="personnel-name">SGT. MIKE "TASTE" RODRIGUEZ</div>
+                <div class="personnel-file declassified">
+                    <div class="personnel-name">SGT. TAWNY "HOUND" DACHS</div>
                     <div class="personnel-rank">FIELD TESTING SUPERVISOR</div>
                     <div class="personnel-bio">
-                        Conducted over 1,000 field tests across military installations worldwide. Legendary for his ability to detect flavor deficiencies in combat rations. His approval rating system is the gold standard for tactical seasoning deployment.
+                        Conducted over 2,000 field tests across military installations worldwide. The Hound's rigorous testing protocols in extreme environments - from Arctic bases to desert outposts - proved STANDARD ISSUE's tactical superiority. Her approval rating system is the gold standard for seasoning deployment effectiveness.
                     </div>
                 </div>
 
                 <div class="personnel-file">
-                    <div class="personnel-name">CPT. ANNA "LOGISTICS" CHEN</div>
-                    <div class="personnel-rank">SUPPLY CHAIN COMMANDER</div>
+                    <div class="personnel-name">[CLASSIFIED]</div>
+                    <div class="personnel-rank">INTELLIGENCE OPERATIONS - CLEARANCE LEVEL 9</div>
                     <div class="personnel-bio">
-                        Manages classified supply networks for premium ingredient procurement. Ensures every jar of STANDARD ISSUE meets strict military specifications. Coordinates global distribution operations from secure command center.
+                        [REDACTED] - Information regarding this operative's identity, background, and specific operational duties remains classified under National Security provisions. Authorized personnel may request access through proper intelligence channels.
                     </div>
                 </div>
             </div>
@@ -502,27 +505,21 @@
                 <div class="section-content">
                     <p><strong>EXCELLENCE:</strong> Every jar of STANDARD ISSUE undergoes rigorous quality testing. We accept nothing less than tactical superiority in flavor enhancement.</p>
                     
-                    <p><strong>AUTHENTICITY:</strong> Our military heritage isn't marketing - it's our foundation. Real field experience creates real flavor solutions.</p>
+                    <p><strong>AUTHENTICITY:</strong> Our military heritage isn't marketing - it's our foundation. Each team member brings real combat kitchen experience to civilian operations.</p>
                     
-                    <p><strong>RELIABILITY:</strong> When deployed, STANDARD ISSUE performs. No exceptions. Your mission-critical meals deserve dependable flavor support.</p>
+                    <p><strong>INNOVATION:</strong> Continuous research and development ensures our seasoning technology stays ahead of inferior civilian alternatives.</p>
                     
-                    <p><strong>INNOVATION:</strong> Continuous improvement through advanced R&D operations. Today's STANDARD ISSUE is tomorrow's vintage formula.</p>
+                    <p><strong>MISSION SUCCESS:</strong> Every meal enhanced with STANDARD ISSUE represents a successful flavor deployment operation. We measure success by customer satisfaction and repeat engagements.</p>
                 </div>
             </div>
 
-            <div class="section">
-                <div class="section-header">IV. AUTHORIZATION STATUS</div>
-                <div class="section-content">
-                    <p>This document has been reviewed and approved by RATIONS Command. All information contained herein is accurate as of the date issued and represents official policy for Operation Flavor Superiority.</p>
-                    
-                    <p>Civilian deployment of STANDARD ISSUE is hereby authorized for immediate distribution. No security clearance required for procurement.</p>
-                    
-                    <p style="text-align: center; margin-top: 2rem; font-weight: bold; color: #4a5d3a;">
-                        CLASSIFICATION: UNCLASSIFIED<br>
-                        DISTRIBUTION: UNLIMITED<br>
-                        END OF BRIEFING
-                    </p>
-                </div>
+            <!-- Classification Footer -->
+            <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #8a7a5a;">
+                <p style="color: #4a5d3a; font-weight: bold; font-size: 1rem; font-family: 'Courier Prime', monospace;">
+                    CLASSIFICATION: UNCLASSIFIED<br>
+                    DISTRIBUTION: UNLIMITED<br>
+                    DOCUMENT ID: MB-FLAVOR-001
+                </p>
             </div>
         </div>
     </div>
