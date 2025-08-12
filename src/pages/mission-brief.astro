@@ -1,0 +1,530 @@
+---
+// src/pages/mission-brief.astro
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RATIONS - Mission Brief</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Special+Elite:wght@400&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Special Elite', 'Courier New', monospace;
+            background: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23d4c19e"/><g opacity="0.1"><line x1="0" y1="10" x2="100" y2="10" stroke="%23333" stroke-width="0.5"/><line x1="0" y1="20" x2="100" y2="20" stroke="%23333" stroke-width="0.5"/><line x1="0" y1="30" x2="100" y2="30" stroke="%23333" stroke-width="0.5"/><line x1="0" y1="40" x2="100" y2="40" stroke="%23333" stroke-width="0.5"/><line x1="0" y1="50" x2="100" y2="50" stroke="%23333" stroke-width="0.5"/></g></svg>') repeat,
+                linear-gradient(45deg, #d4c19e 25%, transparent 25%),
+                linear-gradient(-45deg, #d4c19e 25%, transparent 25%);
+            background-size: 200px 200px, 30px 30px, 30px 30px;
+            color: #2d2d1f;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav-container {
+            background: 
+                linear-gradient(90deg, rgba(45, 45, 31, 0.9) 0%, rgba(60, 60, 40, 0.9) 100%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><rect width="50" height="50" fill="%23545438"/><path d="M0 25h50M25 0v50" stroke="%23333" stroke-width="0.5" opacity="0.3"/></svg>');
+            backdrop-filter: blur(2px);
+            border-bottom: 3px solid #4a5d3a;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #8FBC8F;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            letter-spacing: 3px;
+            border: 2px solid #8FBC8F;
+            padding: 8px 16px;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #d4c19e;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 16px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(0,0,0,0.1);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #8FBC8F;
+            border-color: #8FBC8F;
+            background: rgba(143, 188, 143, 0.1);
+            text-shadow: 0 0 5px rgba(143, 188, 143, 0.5);
+        }
+
+        /* Document Container */
+        .document-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .classified-header {
+            background: #2d2d1f;
+            color: #ff6b6b;
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            letter-spacing: 3px;
+            border: 3px solid #ff6b6b;
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.4);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .classified-header::before {
+            content: '⚡';
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+        }
+
+        .classified-header::after {
+            content: '⚡';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+        }
+
+        /* Document Pages */
+        .document-page {
+            background: 
+                linear-gradient(to bottom, rgba(212, 193, 158, 0.95), rgba(196, 176, 148, 0.95)),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23d4c19e"/><g opacity="0.05"><line x1="0" y1="10" x2="100" y2="10" stroke="%23000" stroke-width="0.5"/><line x1="0" y1="20" x2="100" y2="20" stroke="%23000" stroke-width="0.5"/><line x1="0" y1="30" x2="100" y2="30" stroke="%23000" stroke-width="0.5"/></g></svg>');
+            border: 3px solid #8a7a5a;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .document-page::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 1px solid #6a5a3a;
+            pointer-events: none;
+        }
+
+        .page-header {
+            text-align: center;
+            border-bottom: 2px solid #4a5d3a;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .doc-title {
+            font-size: 2.2rem;
+            color: #2d2d1f;
+            letter-spacing: 4px;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .doc-subtitle {
+            color: #6b7a5b;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+        }
+
+        .doc-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+            font-family: 'Courier Prime', monospace;
+        }
+
+        .info-item {
+            background: rgba(255,255,255,0.3);
+            padding: 0.5rem;
+            border: 1px solid #8a7a5a;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #4a5d3a;
+        }
+
+        /* Content Sections */
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            background: rgba(74, 93, 58, 0.8);
+            color: #d4c19e;
+            padding: 0.8rem 1rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #8FBC8F;
+        }
+
+        .section-content {
+            line-height: 1.8;
+            color: #2d2d1f;
+            font-size: 1.1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Personnel Files */
+        .personnel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .personnel-file {
+            background: rgba(255,255,255,0.4);
+            border: 2px solid #8a7a5a;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .personnel-file::before {
+            content: 'CLASSIFIED';
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: #ff6b6b;
+            color: white;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            transform: rotate(15deg);
+        }
+
+        .personnel-name {
+            font-size: 1.3rem;
+            color: #4a5d3a;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .personnel-rank {
+            color: #6b7a5b;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .personnel-bio {
+            line-height: 1.6;
+            color: #2d2d1f;
+        }
+
+        /* Mission Objectives */
+        .objectives-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .objective-item {
+            background: rgba(143, 188, 143, 0.1);
+            border: 1px solid #8FBC8F;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 5px solid #4a5d3a;
+            position: relative;
+        }
+
+        .objective-item::before {
+            content: counter(objective-counter);
+            counter-increment: objective-counter;
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #4a5d3a;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .objectives-list {
+            counter-reset: objective-counter;
+        }
+
+        /* Stamps and Seals */
+        .document-stamps {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+
+        .stamp {
+            position: absolute;
+            background: rgba(255, 0, 0, 0.6);
+            color: white;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .stamp-1 { top: 30px; right: 30px; transform: rotate(-12deg); }
+        .stamp-2 { bottom: 30px; left: 30px; transform: rotate(8deg); background: rgba(0, 100, 0, 0.6); }
+        .stamp-3 { top: 50%; left: 20px; transform: translateY(-50%) rotate(-90deg); background: rgba(0, 0, 255, 0.6); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .document-container {
+                padding: 0 1rem;
+            }
+
+            .document-page {
+                padding: 2rem 1.5rem;
+            }
+
+            .doc-title {
+                font-size: 1.8rem;
+                letter-spacing: 2px;
+            }
+
+            .personnel-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .doc-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav-content">
+            <div class="logo">RATIONS</div>
+            <ul class="nav-links">
+                <li><a href="/supply-depot">Supply Depot</a></li>
+                <li><a href="/mission-brief" class="active">Mission Brief</a></li>
+                <li><a href="/merchandise">Merchandise</a></li>
+                <li><a href="/field-manual">Field Manual</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="document-container">
+        <!-- Classification Header -->
+        <div class="classified-header">
+            TOP SECRET - EYES ONLY - OPERATION FLAVOR SUPERIORITY
+        </div>
+
+        <!-- Mission Brief Document -->
+        <div class="document-page">
+            <div class="document-stamps">
+                <div class="stamp stamp-1">APPROVED</div>
+                <div class="stamp stamp-2">AUTHORIZED</div>
+                <div class="stamp stamp-3">FILED</div>
+            </div>
+
+            <div class="page-header">
+                <h1 class="doc-title">MISSION BRIEF</h1>
+                <p class="doc-subtitle">OPERATION FLAVOR SUPERIORITY</p>
+            </div>
+
+            <div class="doc-info">
+                <div class="info-item">
+                    <div class="info-label">DOCUMENT CLASS:</div>
+                    <div>UNCLASSIFIED</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">DATE ISSUED:</div>
+                    <div>2024.12.15</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">ISSUING AUTHORITY:</div>
+                    <div>RATIONS COMMAND</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">DISTRIBUTION:</div>
+                    <div>UNLIMITED</div>
+                </div>
+            </div>
+
+            <!-- Origin Story -->
+            <div class="section">
+                <div class="section-header">I. OPERATIONAL BACKGROUND</div>
+                <div class="section-content">
+                    <p>For decades, civilian kitchens have operated under suboptimal conditions. Intelligence reports indicate widespread deployment of inferior seasoning compounds, resulting in catastrophic flavor failures across domestic food preparation sectors.</p>
+                    
+                    <p>The RATIONS division was established to address this critical gap in culinary defense capabilities. Our research and development unit has successfully engineered a tactical seasoning solution capable of transforming any meal into a morale-boosting operational success.</p>
+                    
+                    <p>After extensive field testing across 847 combat kitchens and civilian installations, we are prepared to deploy STANDARD ISSUE to the public sector. This represents the largest flavor enhancement operation in recorded history.</p>
+                </div>
+            </div>
+
+            <!-- Company Mission -->
+            <div class="section">
+                <div class="section-header">II. MISSION OBJECTIVES</div>
+                <div class="section-content">
+                    <ul class="objectives-list">
+                        <li class="objective-item">
+                            <strong>PRIMARY OBJECTIVE:</strong> Eliminate bland food incidents in civilian sectors through deployment of superior seasoning technology.
+                        </li>
+                        <li class="objective-item">
+                            <strong>SECONDARY OBJECTIVE:</strong> Establish RATIONS as the premier tactical flavor solutions provider for home kitchens worldwide.
+                        </li>
+                        <li class="objective-item">
+                            <strong>TACTICAL GOAL:</strong> Achieve 100% customer satisfaction through scientifically-engineered flavor enhancement systems.
+                        </li>
+                        <li class="objective-item">
+                            <strong>LONG-TERM STRATEGY:</strong> Expand operational capacity to include additional tactical seasoning variants and field equipment.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personnel Files -->
+        <div class="document-page">
+            <div class="page-header">
+                <h2 class="doc-title">PERSONNEL FILES</h2>
+                <p class="doc-subtitle">COMMAND STRUCTURE - CLEARANCE LEVEL 5</p>
+            </div>
+
+            <div class="personnel-grid">
+                <div class="personnel-file">
+                    <div class="personnel-name">COL. JAMES "SPICE" MARTINEZ</div>
+                    <div class="personnel-rank">COMMANDING OFFICER - FLAVOR OPERATIONS</div>
+                    <div class="personnel-bio">
+                        20-year veteran of military food service. Developed revolutionary K-ration enhancement protocols during Operation Desert Storm. Led the team that created the STANDARD ISSUE formula. Specializes in field-tested flavor combinations under extreme conditions.
+                    </div>
+                </div>
+
+                <div class="personnel-file">
+                    <div class="personnel-name">MAJ. SARAH "CHEF" THOMPSON</div>
+                    <div class="personnel-rank">HEAD OF RESEARCH & DEVELOPMENT</div>
+                    <div class="personnel-bio">
+                        Former CIA culinary operative with extensive experience in international flavor intelligence. Holds classified clearance for exotic spice procurement. Responsible for the secret ingredient matrix that makes STANDARD ISSUE tactically superior.
+                    </div>
+                </div>
+
+                <div class="personnel-file">
+                    <div class="personnel-name">SGT. MIKE "TASTE" RODRIGUEZ</div>
+                    <div class="personnel-rank">FIELD TESTING SUPERVISOR</div>
+                    <div class="personnel-bio">
+                        Conducted over 1,000 field tests across military installations worldwide. Legendary for his ability to detect flavor deficiencies in combat rations. His approval rating system is the gold standard for tactical seasoning deployment.
+                    </div>
+                </div>
+
+                <div class="personnel-file">
+                    <div class="personnel-name">CPT. ANNA "LOGISTICS" CHEN</div>
+                    <div class="personnel-rank">SUPPLY CHAIN COMMANDER</div>
+                    <div class="personnel-bio">
+                        Manages classified supply networks for premium ingredient procurement. Ensures every jar of STANDARD ISSUE meets strict military specifications. Coordinates global distribution operations from secure command center.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Core Values -->
+        <div class="document-page">
+            <div class="page-header">
+                <h2 class="doc-title">TACTICAL PRINCIPLES</h2>
+                <p class="doc-subtitle">OPERATIONAL VALUES AND STANDARDS</p>
+            </div>
+
+            <div class="section">
+                <div class="section-header">III. CORE VALUES</div>
+                <div class="section-content">
+                    <p><strong>EXCELLENCE:</strong> Every jar of STANDARD ISSUE undergoes rigorous quality testing. We accept nothing less than tactical superiority in flavor enhancement.</p>
+                    
+                    <p><strong>AUTHENTICITY:</strong> Our military heritage isn't marketing - it's our foundation. Real field experience creates real flavor solutions.</p>
+                    
+                    <p><strong>RELIABILITY:</strong> When deployed, STANDARD ISSUE performs. No exceptions. Your mission-critical meals deserve dependable flavor support.</p>
+                    
+                    <p><strong>INNOVATION:</strong> Continuous improvement through advanced R&D operations. Today's STANDARD ISSUE is tomorrow's vintage formula.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">IV. AUTHORIZATION STATUS</div>
+                <div class="section-content">
+                    <p>This document has been reviewed and approved by RATIONS Command. All information contained herein is accurate as of the date issued and represents official policy for Operation Flavor Superiority.</p>
+                    
+                    <p>Civilian deployment of STANDARD ISSUE is hereby authorized for immediate distribution. No security clearance required for procurement.</p>
+                    
+                    <p style="text-align: center; margin-top: 2rem; font-weight: bold; color: #4a5d3a;">
+                        CLASSIFICATION: UNCLASSIFIED<br>
+                        DISTRIBUTION: UNLIMITED<br>
+                        END OF BRIEFING
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
