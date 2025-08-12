@@ -7,9 +7,22 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RATIONS - Merchandise</title>
+    <title>RATIONS - Surplus Depot</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Special+Elite:wght@400&display=swap');
+        /* Import authentic military stencil fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Space+Mono:wght@400;700&family=Courier+Prime:wght@400;700&display=swap');
+
+        :root {
+            --olive-drab: #6B7C32;
+            --army-green: #4B5320;
+            --field-gray: #8B956D;
+            --kraft-tan: #D2B48C;
+            --mil-black: #2F2F2F;
+            --warning-red: #CC3333;
+            --approval-green: #228B22;
+            --stencil-font: 'Orbitron', 'Rajdhani', monospace;
+            --body-font: 'Rajdhani', sans-serif;
+        }
 
         * {
             margin: 0;
@@ -18,25 +31,25 @@
         }
 
         body {
-            font-family: 'Special Elite', 'Courier New', monospace;
+            font-family: var(--body-font);
             background: 
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23d4c19e"/><g opacity="0.08"><rect x="0" y="0" width="20" height="20" fill="%23666"/><rect x="40" y="20" width="20" height="20" fill="%23666"/><rect x="20" y="40" width="20" height="20" fill="%23666"/><rect x="60" y="60" width="20" height="20" fill="%23666"/></g></svg>') repeat,
-                linear-gradient(45deg, rgba(138, 122, 90, 0.1) 25%, transparent 25%),
-                linear-gradient(-45deg, rgba(138, 122, 90, 0.1) 25%, transparent 25%);
-            background-size: 120px 120px, 40px 40px, 40px 40px;
+                linear-gradient(45deg, rgba(74, 93, 58, 0.03) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(74, 93, 58, 0.03) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(74, 93, 58, 0.03) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(74, 93, 58, 0.03) 75%),
+                #F5F5DC;
+            background-size: 30px 30px;
+            background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
             color: #2d2d1f;
             min-height: 100vh;
-            overflow-x: hidden;
+            line-height: 1.6;
         }
 
         /* Navigation */
         .nav-container {
-            background: 
-                linear-gradient(90deg, rgba(45, 45, 31, 0.9) 0%, rgba(60, 60, 40, 0.9) 100%),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><rect width="50" height="50" fill="%23545438"/><path d="M0 25h50M25 0v50" stroke="%23333" stroke-width="0.5" opacity="0.3"/></svg>');
-            backdrop-filter: blur(2px);
-            border-bottom: 3px solid #4a5d3a;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            background: linear-gradient(135deg, #4a5d3a 0%, #6b7c32 100%);
+            border-bottom: 3px solid #2d2d1f;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -52,9 +65,10 @@
         }
 
         .logo {
+            font-family: var(--stencil-font);
             font-size: 2rem;
-            font-weight: bold;
-            color: #8FBC8F;
+            font-weight: 900;
+            color: #d4c19e;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
             letter-spacing: 3px;
             border: 2px solid #8FBC8F;
@@ -212,6 +226,7 @@
             padding: 3px 8px;
             font-size: 0.7rem;
             font-weight: bold;
+            letter-spacing: 1px;
             transform: rotate(12deg);
             letter-spacing: 1px;
         }
@@ -461,145 +476,77 @@
                     </div>
                     <div class="spec-line">
                         <span class="spec-label">Classification:</span>
-                        <span>UNCLASSIFIED</span>
+                        <span>DECLASSIFIED</span>
                     </div>
                     <div class="spec-line">
                         <span class="spec-label">Shelf Life:</span>
-                        <span>24 months</span>
-                    </div>
-                    <div class="spec-line">
-                        <span class="spec-label">Origin:</span>
-                        <span>USA</span>
+                        <span>36 Months</span>
                     </div>
                 </div>
-                <div class="product-price">$24.95</div>
-                <button class="order-btn" onclick="alert('Redirecting to supply depot for Standard Issue procurement.')">
-                    🎖️ ORDER NOW
-                </button>
+                <div class="product-price">$16.95</div>
+                <button class="order-btn">SECURE PROCUREMENT</button>
             </div>
 
-            <!-- Apparel -->
-            <div class="product-card">
-                <div class="product-badge">LIMITED</div>
+            <!-- Tactical Apparel -->
+            <div class="product-card coming-soon">
+                <div class="product-badge">INTEL</div>
                 <div class="product-image">👕</div>
                 <h3 class="product-name">TACTICAL FIELD SHIRT</h3>
-                <div class="product-code">ITEM: TS-002-OD</div>
+                <div class="product-code">ITEM: TFS-002-2025</div>
                 <p class="product-description">
-                    Official RATIONS command shirt. Olive drab cotton blend with authentic military 
-                    stencil logo. Regulation collar and pocket configuration for field operations.
+                    Heavy-duty tactical shirt with RATIONS logo. Built for kitchen operations and 
+                    civilian deployment scenarios.
                 </p>
-                <div class="product-specs">
-                    <div class="spec-line">
-                        <span class="spec-label">Material:</span>
-                        <span>60% Cotton, 40% Poly</span>
-                    </div>
-                    <div class="spec-line">
-                        <span class="spec-label">Sizes:</span>
-                        <span>S - XXXL</span>
-                    </div>
-                    <div class="spec-line">
-                        <span class="spec-label">Color:</span>
-                        <span>Olive Drab</span>
-                    </div>
-                    <div class="spec-line">
-                        <span class="spec-label">Care:</span>
-                        <span>Machine Wash</span>
-                    </div>
-                </div>
-                <div class="product-price">$32.95</div>
-                <button class="order-btn" onclick="alert('Field shirt procurement system deploying soon.')">
-                    🎖️ RESERVE NOW
-                </button>
+                <div class="product-price">$29.95</div>
             </div>
 
-            <!-- Mess Kit -->
-            <div class="product-card">
-                <div class="product-badge">GEAR</div>
-                <div class="product-image">🍽️</div>
-                <h3 class="product-name">TACTICAL MESS KIT</h3>
-                <div class="product-code">ITEM: MK-003-STL</div>
-                <p class="product-description">
-                    Complete field mess kit with stainless steel construction. Includes plate, bowl, 
-                    cup, and utensils. RATIONS logo engraved. Perfect for outdoor operations.
-                </p>
-                <div class="product-specs">
-                    <div class="spec-line">
-                        <span class="spec-label">Material:</span>
-                        <span>304 Stainless Steel</span>
-                    </div>
-                    <div class="spec-line">
-                        <span class="spec-label">Pieces:</span>
-                        <span>6 Items</span>
-                    </div>
-                    <div class="spec-line">
-                        <span class="spec-label">Weight:</span>
-                        <span>1.2 lbs</span>
-                    </div>
-                    <div class="spec-line">
-                        <span class="spec-label">Storage:</span>
-                        <span>Compact Nesting</span>
-                    </div>
-                </div>
-                <div class="product-price">$45.95</div>
-                <button class="order-btn" onclick="alert('Mess kit supply chain activating soon.')">
-                    🎖️ PRE-ORDER
-                </button>
-            </div>
-
-            <!-- Field Manual -->
-            <div class="product-card">
-                <div class="product-badge">INTEL</div>
-                <div class="product-image">📖</div>
-                <h3 class="product-name">PRINTED FIELD MANUAL</h3>
-                <div class="product-code">ITEM: FM-004-PPR</div>
-                <p class="product-description">
-                    Official RATIONS field manual in hardcopy format. Waterproof pages, 
-                    tactical binding. Contains all deployment procedures and mission protocols.
-                </p>
-                <div class="product-specs">
-                    <div class="spec-line">
-                        <span class="spec-label">Pages:</span>
-                        <span>68 Pages</span>
-                    </div>
-                    <div class="spec-line">
-                        <span class="spec-label">Binding:</span>
-                        <span>Spiral Bound</span>
-                    </div>
-                    <div class="spec-line">
-                        <span class="spec-label">Paper:</span>
-                        <span>Waterproof Synthetic</span>
-                    </div>
-                    <div class="spec-line">
-                        <span class="spec-label">Size:</span>
-                        <span>5.5" x 8.5"</span>
-                    </div>
-                </div>
-                <div class="product-price">$18.95</div>
-                <button class="order-btn" onclick="alert('Manual printing operations commencing soon.')">
-                    🎖️ ORDER COPY
-                </button>
-            </div>
-
-            <!-- Coming Soon Items -->
+            <!-- Equipment -->
             <div class="product-card coming-soon">
-                <div class="product-badge">FUTURE</div>
+                <div class="product-badge">GEAR</div>
                 <div class="product-image">🎒</div>
-                <h3 class="product-name">TACTICAL BACKPACK</h3>
-                <div class="product-code">ITEM: BP-005-MCO</div>
+                <h3 class="product-name">FIELD COOKING KIT</h3>
+                <div class="product-code">ITEM: FCK-003-2025</div>
                 <p class="product-description">
-                    Military-spec backpack with RATIONS patch. MOLLE compatible. 
-                    Perfect for field operations and outdoor cooking missions.
+                    Complete portable cooking solution with tactical seasoning deployment system. 
+                    Essential for field operations.
                 </p>
                 <div class="product-price">$89.95</div>
             </div>
 
+            <!-- Patches -->
             <div class="product-card coming-soon">
-                <div class="product-badge">FUTURE</div>
-                <div class="product-image">🧢</div>
-                <h3 class="product-name">COMMAND CAP</h3>
-                <div class="product-code">ITEM: CC-006-BLK</div>
+                <div class="product-badge">INSIGNIA</div>
+                <div class="product-image">🏅</div>
+                <h3 class="product-name">RATIONS UNIT PATCHES</h3>
+                <div class="product-code">ITEM: RUP-004-2025</div>
                 <p class="product-description">
-                    Official RATIONS command cap with embroidered logo. 
+                    Official RATIONS unit patches. Velcro backing for tactical vest deployment. 
+                    Show your allegiance to superior flavor.
+                </p>
+                <div class="product-price">$12.95</div>
+            </div>
+
+            <!-- Mug -->
+            <div class="product-card coming-soon">
+                <div class="product-badge">MESS</div>
+                <div class="product-image">☕</div>
+                <h3 class="product-name">TACTICAL MESS MUG</h3>
+                <div class="product-code">ITEM: TMM-005-2025</div>
+                <p class="product-description">
+                    Military-spec ceramic mug with heat retention technology. Perfect for field coffee 
+                    and tactical hydration missions.
+                </p>
+                <div class="product-price">$19.95</div>
+            </div>
+
+            <!-- Hat -->
+            <div class="product-card coming-soon">
+                <div class="product-badge">HEADGEAR</div>
+                <div class="product-image">🧢</div>
+                <h3 class="product-name">FIELD OPERATIONS CAP</h3>
+                <div class="product-code">ITEM: FOC-006-2025</div>
+                <p class="product-description">
+                    Tactical baseball cap with embroidered RATIONS insignia. 
                     Adjustable fit, tactical styling, multiple color options available.
                 </p>
                 <div class="product-price">$24.95</div>
@@ -631,13 +578,18 @@
 
     <script>
         // Simple category filtering (can be expanded)
-        document.querySelectorAll('.category-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Add category filtering logic here when more products are added
-                console.log('Category selected:', this.textContent);
+        document.querySelectorAll('.category-btn').forEach(function(btn) {
+            btn.addEventListener('click', function(event) {
+                const clickedBtn = event.currentTarget as HTMLButtonElement;
+                if (clickedBtn) {
+                    document.querySelectorAll('.category-btn').forEach(function(b) {
+                        b.classList.remove('active');
+                    });
+                    clickedBtn.classList.add('active');
+                    
+                    // Add category filtering logic here when more products are added
+                    console.log('Category selected:', clickedBtn.textContent);
+                }
             });
         });
     </script>
