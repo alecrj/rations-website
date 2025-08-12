@@ -7,23 +7,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RATIONS - Surplus Depot</title>
+    <title>RATIONS - Merchandise</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
-        /* Import authentic military stencil fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Space+Mono:wght@400;700&family=Courier+Prime:wght@400;700&display=swap');
-
-        :root {
-            --olive-drab: #6B7C32;
-            --army-green: #4B5320;
-            --field-gray: #8B956D;
-            --kraft-tan: #D2B48C;
-            --mil-black: #2F2F2F;
-            --warning-red: #CC3333;
-            --approval-green: #228B22;
-            --stencil-font: 'Orbitron', 'Rajdhani', monospace;
-            --body-font: 'Rajdhani', sans-serif;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -31,28 +19,18 @@
         }
 
         body {
-            font-family: var(--body-font);
-            background: 
-                linear-gradient(45deg, rgba(74, 93, 58, 0.03) 25%, transparent 25%),
-                linear-gradient(-45deg, rgba(74, 93, 58, 0.03) 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, rgba(74, 93, 58, 0.03) 75%),
-                linear-gradient(-45deg, transparent 75%, rgba(74, 93, 58, 0.03) 75%),
-                #F5F5DC;
-            background-size: 30px 30px;
-            background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
+            font-family: Georgia, serif;
+            background: #d4c19e;
             color: #2d2d1f;
-            min-height: 100vh;
             line-height: 1.6;
+            min-height: 100vh;
         }
 
         /* Navigation */
         .nav-container {
-            background: linear-gradient(135deg, #4a5d3a 0%, #6b7c32 100%);
-            border-bottom: 3px solid #2d2d1f;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            background: rgba(74, 93, 58, 0.9);
+            border-bottom: 3px solid #4a5d3a;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
         .nav-content {
@@ -65,235 +43,215 @@
         }
 
         .logo {
-            font-family: var(--stencil-font);
-            font-size: 2rem;
-            font-weight: 900;
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.8rem;
+            font-weight: bold;
             color: #d4c19e;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-            letter-spacing: 3px;
-            border: 2px solid #8FBC8F;
-            padding: 8px 16px;
-            background: rgba(0,0,0,0.2);
+            text-decoration: none;
+            letter-spacing: 4px;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 0;
             list-style: none;
         }
 
         .nav-links a {
             color: #d4c19e;
             text-decoration: none;
-            font-weight: bold;
-            padding: 8px 16px;
+            font-weight: 600;
+            padding: 0.8rem 1.5rem;
             border: 1px solid transparent;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
-            background: rgba(0,0,0,0.1);
+            font-size: 0.9rem;
         }
 
-        .nav-links a:hover, .nav-links a.active {
-            color: #8FBC8F;
-            border-color: #8FBC8F;
-            background: rgba(143, 188, 143, 0.1);
-            text-shadow: 0 0 5px rgba(143, 188, 143, 0.5);
-        }
-
-        /* Header */
-        .store-header {
-            background: 
-                linear-gradient(135deg, rgba(74, 93, 58, 0.9) 0%, rgba(45, 45, 31, 0.9) 100%),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%234a5d3a"/><g opacity="0.1"><path d="M0 0l100 100M100 0L0 100" stroke="%23000" stroke-width="1"/></g></svg>');
-            color: #d4c19e;
-            padding: 3rem 2rem;
-            text-align: center;
-            position: relative;
-        }
-
-        .store-header::before {
-            content: '🎖️';
-            position: absolute;
-            left: 30px;
-            top: 30px;
-            font-size: 2rem;
-            opacity: 0.3;
-        }
-
-        .store-header::after {
-            content: '🎖️';
-            position: absolute;
-            right: 30px;
-            top: 30px;
-            font-size: 2rem;
-            opacity: 0.3;
-        }
-
-        .store-title {
-            font-size: 3rem;
-            color: #8FBC8F;
-            margin-bottom: 1rem;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
-            letter-spacing: 5px;
-            font-weight: bold;
-        }
-
-        .store-subtitle {
-            font-size: 1.3rem;
-            letter-spacing: 3px;
-            margin-bottom: 1rem;
-        }
-
-        .store-notice {
-            background: rgba(255, 107, 107, 0.8);
-            color: white;
-            padding: 0.5rem 1rem;
-            display: inline-block;
-            font-weight: bold;
-            letter-spacing: 1px;
-            transform: rotate(-2deg);
-            box-shadow: 3px 3px 8px rgba(0,0,0,0.4);
-        }
-
-        /* Categories */
-        .categories {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-
-        .category-nav {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .category-btn {
-            background: rgba(74, 93, 58, 0.8);
-            color: #d4c19e;
-            border: 2px solid #8a7a5a;
-            padding: 0.8rem 1.5rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-family: inherit;
-            position: relative;
-        }
-
-        .category-btn:hover, .category-btn.active {
+        .nav-links a:hover,
+        .nav-links a.active {
             background: #8FBC8F;
             color: #2d2d1f;
             border-color: #4a5d3a;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
-        /* Product Grid */
-        .product-grid {
+        /* Document Container */
+        .document-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Classification Header */
+        .classified-header {
+            background: #4a5d3a;
+            color: #d4c19e;
+            text-align: center;
+            padding: 0.5rem;
+            font-family: 'Courier Prime', monospace;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* Document Page */
+        .document-page {
+            background: rgba(255,255,255,0.8);
+            border: 3px solid #8a7a5a;
+            padding: 3rem;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .document-page::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 1px solid #8a7a5a;
+            pointer-events: none;
+        }
+
+        /* Document Stamps */
+        .document-stamps {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .stamp {
+            background: #ff6b6b;
+            color: white;
+            padding: 4px 8px;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.7rem;
+            font-weight: bold;
+            transform: rotate(15deg);
+            border: 2px solid #cc0000;
+        }
+
+        .stamp-2 {
+            transform: rotate(-10deg);
+            background: #4a5d3a;
+            border-color: #2d3d1f;
+        }
+
+        .stamp-3 {
+            transform: rotate(8deg);
+            background: #8FBC8F;
+            color: #2d2d1f;
+            border-color: #6b8a4a;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 3px solid #4a5d3a;
+            padding-bottom: 2rem;
+        }
+
+        .doc-title {
+            font-family: 'Courier Prime', monospace;
+            font-size: 3rem;
+            color: #4a5d3a;
+            font-weight: bold;
+            letter-spacing: 6px;
+            margin-bottom: 0.5rem;
+        }
+
+        .doc-subtitle {
+            font-family: 'Courier Prime', monospace;
+            color: #6b7a5b;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            background: rgba(74, 93, 58, 0.8);
+            color: #d4c19e;
+            padding: 1rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #8FBC8F;
+        }
+
+        /* Inventory Grid */
+        .inventory-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-bottom: 3rem;
         }
 
-        .product-card {
-            background: 
-                linear-gradient(135deg, rgba(212, 193, 158, 0.9) 0%, rgba(196, 176, 148, 0.9) 100%),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23d4c19e"/><g opacity="0.1"><rect x="10" y="10" width="80" height="80" fill="none" stroke="%23666" stroke-width="1"/></g></svg>');
-            border: 3px solid #8a7a5a;
-            padding: 1.5rem;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        .inventory-item {
+            background: rgba(255,255,255,0.4);
+            border: 2px solid #8a7a5a;
+            padding: 2rem;
             position: relative;
             transition: transform 0.3s ease;
         }
 
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.4);
+        .inventory-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
 
-        .product-badge {
-            position: absolute;
-            top: -8px;
-            right: 15px;
-            background: #ff6b6b;
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #4a5d3a;
+        }
+
+        .item-name {
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.2rem;
+            color: #4a5d3a;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .item-code {
+            font-family: 'Courier Prime', monospace;
+            background: #4a5d3a;
             color: white;
-            padding: 3px 8px;
+            padding: 0.3rem 0.8rem;
             font-size: 0.7rem;
             font-weight: bold;
             letter-spacing: 1px;
-            transform: rotate(12deg);
-            letter-spacing: 1px;
         }
 
-        .product-image {
-            width: 100%;
-            height: 200px;
-            background: 
-                linear-gradient(145deg, #4a5d3a 0%, #6b8a4a 30%, #4a5d3a 70%, #3a4d2a 100%);
-            border: 2px solid #2a3d1a;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: #8FBC8F;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .product-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><g opacity="0.1"><path d="M0 0l100 100M100 0L0 100" stroke="%23000" stroke-width="2"/></g></svg>');
-        }
-
-        .product-name {
-            font-size: 1.3rem;
-            color: #4a5d3a;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            letter-spacing: 1px;
-        }
-
-        .product-code {
+        .item-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
             font-family: 'Courier Prime', monospace;
             font-size: 0.8rem;
-            color: #6b7a5b;
-            margin-bottom: 1rem;
+        }
+
+        .spec-item {
             background: rgba(0,0,0,0.1);
-            padding: 0.2rem 0.5rem;
-            display: inline-block;
-        }
-
-        .product-description {
-            color: #2d2d1f;
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-        }
-
-        .product-specs {
-            background: rgba(255,255,255,0.3);
+            padding: 0.3rem;
             border: 1px solid #8a7a5a;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .spec-line {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.3rem;
         }
 
         .spec-label {
@@ -301,105 +259,88 @@
             color: #4a5d3a;
         }
 
-        .product-price {
-            font-size: 1.5rem;
+        .spec-value {
+            color: #2d2d1f;
+        }
+
+        .item-description {
+            line-height: 1.6;
+            color: #2d2d1f;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .item-price {
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.3rem;
             color: #ff6b6b;
             font-weight: bold;
             margin-bottom: 1rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
-        .order-btn {
-            background: linear-gradient(135deg, #8FBC8F 0%, #6b8a4a 100%);
-            color: #2d2d1f;
-            border: 2px solid #4a5d3a;
-            padding: 0.8rem 1.5rem;
+        .item-status {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.8rem;
+            padding: 0.3rem 0.8rem;
             font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            text-transform: uppercase;
             letter-spacing: 1px;
-            transition: all 0.3s ease;
-            font-family: inherit;
-        }
-
-        .order-btn:hover {
-            background: linear-gradient(135deg, #9ACD32 0%, #7ba428 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        /* Special Offers */
-        .special-offers {
-            background: 
-                linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(255, 140, 0, 0.1) 100%),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23ff6b6b" opacity="0.05"/><g opacity="0.1"><path d="M50 10L60 40L90 40L68 58L78 88L50 70L22 88L32 58L10 40L40 40Z" fill="%23fff"/></g></svg>');
-            border: 3px solid #ff6b6b;
-            padding: 2rem;
-            margin: 3rem 0;
             text-align: center;
-            position: relative;
+        }
+
+        .available {
+            background: #8FBC8F;
+            color: #2d2d1f;
+            border: 1px solid #4a5d3a;
+        }
+
+        .coming-soon {
+            background: #ff6b6b;
+            color: white;
+            border: 1px solid #cc0000;
+        }
+
+        /* Special Operations Section */
+        .special-ops {
+            background: rgba(143, 188, 143, 0.2);
+            border: 2px solid #8FBC8F;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
         }
 
         .special-header {
-            font-size: 2rem;
-            color: #ff6b6b;
-            margin-bottom: 1rem;
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.5rem;
+            color: #4a5d3a;
             font-weight: bold;
-            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
         }
 
-        .special-text {
-            font-size: 1.1rem;
+        .special-content {
+            line-height: 1.6;
             color: #2d2d1f;
             margin-bottom: 1.5rem;
-            line-height: 1.6;
         }
 
-        .special-code {
-            background: #ff6b6b;
-            color: white;
+        .operation-code {
+            font-family: 'Courier Prime', monospace;
+            background: #4a5d3a;
+            color: #d4c19e;
             padding: 0.5rem 1rem;
             font-weight: bold;
             letter-spacing: 2px;
-            font-family: 'Courier Prime', monospace;
             display: inline-block;
         }
 
-        /* Coming Soon Items */
-        .coming-soon {
-            opacity: 0.7;
-            position: relative;
-        }
-
-        .coming-soon::after {
-            content: 'COMING SOON';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-15deg);
-            background: rgba(255, 107, 107, 0.9);
-            color: white;
-            padding: 1rem 2rem;
-            font-weight: bold;
-            letter-spacing: 2px;
-            font-size: 1.1rem;
-            z-index: 10;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-        }
-
         /* Footer */
-        .store-footer {
+        .document-footer {
             background: #2d2d1f;
             color: #8a7a5a;
             text-align: center;
             padding: 2rem;
-            margin-top: 4rem;
-        }
-
-        .footer-notice {
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
+            margin-top: 3rem;
+            font-family: 'Courier Prime', monospace;
         }
 
         /* Responsive */
@@ -414,22 +355,25 @@
                 gap: 1rem;
             }
 
-            .store-title {
+            .document-container {
+                padding: 0 1rem;
+            }
+
+            .document-page {
+                padding: 2rem 1.5rem;
+            }
+
+            .doc-title {
                 font-size: 2rem;
                 letter-spacing: 3px;
             }
 
-            .category-nav {
-                gap: 1rem;
-            }
-
-            .product-grid {
+            .inventory-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
             }
 
-            .categories {
-                padding: 2rem 1rem;
+            .item-specs {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -438,7 +382,7 @@
     <!-- Navigation -->
     <nav class="nav-container">
         <div class="nav-content">
-            <div class="logo">RATIONS</div>
+            <a href="/" class="logo">RATIONS</a>
             <ul class="nav-links">
                 <li><a href="/supply-depot">Supply Depot</a></li>
                 <li><a href="/mission-brief">Mission Brief</a></li>
@@ -448,150 +392,268 @@
         </div>
     </nav>
 
-    <!-- Store Header -->
-    <header class="store-header">
-        <h1 class="store-title">SURPLUS DEPOT</h1>
-        <p class="store-subtitle">Tactical Gear & Equipment</p>
-        <div class="store-notice">AUTHORIZED PERSONNEL ONLY</div>
-    </header>
+    <div class="document-container">
+        <!-- Classification Header -->
+        <div class="classified-header">
+            UNCLASSIFIED - AUTHORIZED PERSONNEL EQUIPMENT
+        </div>
 
-    <!-- Categories and Products -->
-    <section class="categories">
-        <!-- Product Grid -->
-        <div class="product-grid">
-            <!-- Core Product -->
-            <div class="product-card">
-                <div class="product-badge">FLAGSHIP</div>
-                <div class="product-image">🏺</div>
-                <h3 class="product-name">STANDARD ISSUE SEASONING</h3>
-                <div class="product-code">ITEM: SI-001-2025</div>
-                <p class="product-description">
-                    Military-grade tactical seasoning blend. Field-tested across 847 installations. 
-                    Transforms any meal into a morale-boosting operational success.
-                </p>
-                <div class="product-specs">
-                    <div class="spec-line">
-                        <span class="spec-label">Net Weight:</span>
-                        <span>4.5 oz (128g)</span>
+        <!-- Merchandise Document -->
+        <div class="document-page">
+            <div class="document-stamps">
+                <div class="stamp stamp-1">SURPLUS</div>
+                <div class="stamp stamp-2">APPROVED</div>
+                <div class="stamp stamp-3">ISSUED</div>
+            </div>
+
+            <div class="page-header">
+                <h1 class="doc-title">SURPLUS DEPOT</h1>
+                <p class="doc-subtitle">TACTICAL GEAR & EQUIPMENT MANIFEST</p>
+            </div>
+
+            <!-- Current Inventory -->
+            <div class="section">
+                <div class="section-header">I. CURRENT INVENTORY</div>
+                
+                <div class="inventory-grid">
+                    <!-- Standard Issue Seasoning -->
+                    <div class="inventory-item">
+                        <div class="item-header">
+                            <div class="item-name">STANDARD ISSUE SEASONING</div>
+                            <div class="item-code">SI-001</div>
+                        </div>
+
+                        <div class="item-specs">
+                            <div class="spec-item">
+                                <div class="spec-label">TYPE:</div>
+                                <div class="spec-value">FLAGSHIP</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">WEIGHT:</div>
+                                <div class="spec-value">4.5 OZ</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">RATING:</div>
+                                <div class="spec-value">COMBAT TESTED</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">CLEARANCE:</div>
+                                <div class="spec-value">ALL PERSONNEL</div>
+                            </div>
+                        </div>
+
+                        <div class="item-description">
+                            Military-grade tactical seasoning blend. Field-tested across 847 installations. 
+                            Transforms any meal into a morale-boosting operational success.
+                        </div>
+
+                        <div class="item-price">$14.95</div>
+                        <div class="item-status available">IN STOCK</div>
                     </div>
-                    <div class="spec-line">
-                        <span class="spec-label">Classification:</span>
-                        <span>DECLASSIFIED</span>
+
+                    <!-- Tactical Apron -->
+                    <div class="inventory-item">
+                        <div class="item-header">
+                            <div class="item-name">TACTICAL COOKING APRON</div>
+                            <div class="item-code">TCA-002</div>
+                        </div>
+
+                        <div class="item-specs">
+                            <div class="spec-item">
+                                <div class="spec-label">TYPE:</div>
+                                <div class="spec-value">PROTECTIVE GEAR</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">MATERIAL:</div>
+                                <div class="spec-value">RIPSTOP CANVAS</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">POCKETS:</div>
+                                <div class="spec-value">6 TACTICAL</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">COLOR:</div>
+                                <div class="spec-value">OLIVE DRAB</div>
+                            </div>
+                        </div>
+
+                        <div class="item-description">
+                            Heavy-duty kitchen apron with multiple tactical pockets for seasoning deployment. 
+                            RATIONS insignia embroidered on chest. Adjustable straps for operational comfort.
+                        </div>
+
+                        <div class="item-price">$29.95</div>
+                        <div class="item-status coming-soon">COMING SOON</div>
                     </div>
-                    <div class="spec-line">
-                        <span class="spec-label">Shelf Life:</span>
-                        <span>36 Months</span>
+
+                    <!-- Tactical T-Shirt -->
+                    <div class="inventory-item">
+                        <div class="item-header">
+                            <div class="item-name">TACTICAL UNIFORM SHIRT</div>
+                            <div class="item-code">TUS-003</div>
+                        </div>
+
+                        <div class="item-specs">
+                            <div class="spec-item">
+                                <div class="spec-label">TYPE:</div>
+                                <div class="spec-value">APPAREL</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">MATERIAL:</div>
+                                <div class="spec-value">100% COTTON</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">SIZES:</div>
+                                <div class="spec-value">S-XXL</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">INSIGNIA:</div>
+                                <div class="spec-value">SCREEN PRINTED</div>
+                            </div>
+                        </div>
+
+                        <div class="item-description">
+                            Premium cotton t-shirt with RATIONS tactical logo. Designed for off-duty wear 
+                            and civilian operations. Available in multiple colors and sizes.
+                        </div>
+
+                        <div class="item-price">$19.95</div>
+                        <div class="item-status coming-soon">COMING SOON</div>
+                    </div>
+
+                    <!-- Tactical Sticker Pack -->
+                    <div class="inventory-item">
+                        <div class="item-header">
+                            <div class="item-name">TACTICAL STICKER PACK</div>
+                            <div class="item-code">TSP-004</div>
+                        </div>
+
+                        <div class="item-specs">
+                            <div class="spec-item">
+                                <div class="spec-label">TYPE:</div>
+                                <div class="spec-value">MORALE PATCH</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">QUANTITY:</div>
+                                <div class="spec-value">5 PACK</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">MATERIAL:</div>
+                                <div class="spec-value">VINYL</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">ADHESIVE:</div>
+                                <div class="spec-value">TACTICAL GRADE</div>
+                            </div>
+                        </div>
+
+                        <div class="item-description">
+                            Weather-resistant vinyl stickers featuring RATIONS logos and tactical insignia. 
+                            Perfect for equipment marking and morale purposes.
+                        </div>
+
+                        <div class="item-price">$12.95</div>
+                        <div class="item-status coming-soon">COMING SOON</div>
+                    </div>
+
+                    <!-- Tactical Mess Mug -->
+                    <div class="inventory-item">
+                        <div class="item-header">
+                            <div class="item-name">TACTICAL MESS MUG</div>
+                            <div class="item-code">TMM-005</div>
+                        </div>
+
+                        <div class="item-specs">
+                            <div class="spec-item">
+                                <div class="spec-label">TYPE:</div>
+                                <div class="spec-value">MESS EQUIPMENT</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">CAPACITY:</div>
+                                <div class="spec-value">12 OZ</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">MATERIAL:</div>
+                                <div class="spec-value">CERAMIC</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">FEATURE:</div>
+                                <div class="spec-value">HEAT RETENTION</div>
+                            </div>
+                        </div>
+
+                        <div class="item-description">
+                            Military-spec ceramic mug with enhanced heat retention technology. 
+                            Perfect for field coffee and tactical hydration missions.
+                        </div>
+
+                        <div class="item-price">$19.95</div>
+                        <div class="item-status coming-soon">COMING SOON</div>
+                    </div>
+
+                    <!-- Field Operations Cap -->
+                    <div class="inventory-item">
+                        <div class="item-header">
+                            <div class="item-name">FIELD OPERATIONS CAP</div>
+                            <div class="item-code">FOC-006</div>
+                        </div>
+
+                        <div class="item-specs">
+                            <div class="spec-item">
+                                <div class="spec-label">TYPE:</div>
+                                <div class="spec-value">HEADGEAR</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">STYLE:</div>
+                                <div class="spec-value">BASEBALL CAP</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">FIT:</div>
+                                <div class="spec-value">ADJUSTABLE</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">INSIGNIA:</div>
+                                <div class="spec-value">EMBROIDERED</div>
+                            </div>
+                        </div>
+
+                        <div class="item-description">
+                            Tactical baseball cap with embroidered RATIONS insignia. 
+                            Adjustable fit, tactical styling, multiple color options available.
+                        </div>
+
+                        <div class="item-price">$24.95</div>
+                        <div class="item-status coming-soon">COMING SOON</div>
                     </div>
                 </div>
-                <div class="product-price">$16.95</div>
-                <button class="order-btn">SECURE PROCUREMENT</button>
             </div>
 
-            <!-- Tactical Apparel -->
-            <div class="product-card coming-soon">
-                <div class="product-badge">INTEL</div>
-                <div class="product-image">👕</div>
-                <h3 class="product-name">TACTICAL FIELD SHIRT</h3>
-                <div class="product-code">ITEM: TFS-002-2025</div>
-                <p class="product-description">
-                    Heavy-duty tactical shirt with RATIONS logo. Built for kitchen operations and 
-                    civilian deployment scenarios.
-                </p>
-                <div class="product-price">$29.95</div>
+            <!-- Special Operations -->
+            <div class="special-ops">
+                <div class="special-header">⚡ SPECIAL OPERATIONS ⚡</div>
+                <div class="special-content">
+                    Join the RATIONS intelligence network for advance notice of new equipment drops, 
+                    exclusive mission briefings, and special operator pricing on tactical gear. 
+                    All personnel welcome to participate in ongoing flavor superiority operations.
+                </div>
+                <div class="operation-code">OPERATION: GEAR-INTEL</div>
             </div>
 
-            <!-- Equipment -->
-            <div class="product-card coming-soon">
-                <div class="product-badge">GEAR</div>
-                <div class="product-image">🎒</div>
-                <h3 class="product-name">FIELD COOKING KIT</h3>
-                <div class="product-code">ITEM: FCK-003-2025</div>
-                <p class="product-description">
-                    Complete portable cooking solution with tactical seasoning deployment system. 
-                    Essential for field operations.
+            <!-- Footer Classification -->
+            <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #8a7a5a;">
+                <p style="color: #4a5d3a; font-weight: bold; font-size: 1rem; font-family: 'Courier Prime', monospace;">
+                    CLASSIFICATION: UNCLASSIFIED<br>
+                    DISTRIBUTION: AUTHORIZED PERSONNEL<br>
+                    MANIFEST ID: SD-SURPLUS-001
                 </p>
-                <div class="product-price">$89.95</div>
-            </div>
-
-            <!-- Patches -->
-            <div class="product-card coming-soon">
-                <div class="product-badge">INSIGNIA</div>
-                <div class="product-image">🏅</div>
-                <h3 class="product-name">RATIONS UNIT PATCHES</h3>
-                <div class="product-code">ITEM: RUP-004-2025</div>
-                <p class="product-description">
-                    Official RATIONS unit patches. Velcro backing for tactical vest deployment. 
-                    Show your allegiance to superior flavor.
-                </p>
-                <div class="product-price">$12.95</div>
-            </div>
-
-            <!-- Mug -->
-            <div class="product-card coming-soon">
-                <div class="product-badge">MESS</div>
-                <div class="product-image">☕</div>
-                <h3 class="product-name">TACTICAL MESS MUG</h3>
-                <div class="product-code">ITEM: TMM-005-2025</div>
-                <p class="product-description">
-                    Military-spec ceramic mug with heat retention technology. Perfect for field coffee 
-                    and tactical hydration missions.
-                </p>
-                <div class="product-price">$19.95</div>
-            </div>
-
-            <!-- Hat -->
-            <div class="product-card coming-soon">
-                <div class="product-badge">HEADGEAR</div>
-                <div class="product-image">🧢</div>
-                <h3 class="product-name">FIELD OPERATIONS CAP</h3>
-                <div class="product-code">ITEM: FOC-006-2025</div>
-                <p class="product-description">
-                    Tactical baseball cap with embroidered RATIONS insignia. 
-                    Adjustable fit, tactical styling, multiple color options available.
-                </p>
-                <div class="product-price">$24.95</div>
             </div>
         </div>
-
-        <!-- Special Offers -->
-        <div class="special-offers">
-            <h2 class="special-header">⚡ SPECIAL OPERATIONS ⚡</h2>
-            <p class="special-text">
-                Join the RATIONS mailing list for intelligence updates on new gear drops, 
-                exclusive mission briefings, and special operator pricing on tactical equipment.
-            </p>
-            <div class="special-code">OPERATION: FLAVOR-INTEL</div>
-        </div>
-    </section>
+    </div>
 
     <!-- Footer -->
-    <footer class="store-footer">
-        <p class="footer-notice">
-            All merchandise manufactured to military specifications. 
-            Quality guaranteed or your money back.
-        </p>
-        <p>&copy; 2025 RATIONS™ - Tactical Gear Division</p>
-        <p style="font-size: 0.8rem; margin-top: 0.5rem;">
-            UNCLASSIFIED // FOR OFFICIAL USE ONLY
-        </p>
+    <footer class="document-footer">
+        <p>RATIONS COMMAND - SURPLUS & EQUIPMENT DIVISION</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.7;">All merchandise manufactured to military specifications. Quality guaranteed or your money back.</p>
     </footer>
-
-    <script>
-        // Simple category filtering (can be expanded)
-        document.querySelectorAll('.category-btn').forEach(function(btn) {
-            btn.addEventListener('click', function(event) {
-                const clickedBtn = event.currentTarget as HTMLButtonElement;
-                if (clickedBtn) {
-                    document.querySelectorAll('.category-btn').forEach(function(b) {
-                        b.classList.remove('active');
-                    });
-                    clickedBtn.classList.add('active');
-                    
-                    // Add category filtering logic here when more products are added
-                    console.log('Category selected:', clickedBtn.textContent);
-                }
-            });
-        });
-    </script>
 </body>
 </html>
