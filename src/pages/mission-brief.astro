@@ -1,7 +1,3 @@
----
-// src/pages/mission-brief.astro
----
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +25,7 @@
             overflow-x: hidden;
         }
 
-        /* Navigation */
+        /* Navigation - ORIGINAL DESKTOP STYLES */
         .nav-container {
             background: 
                 linear-gradient(90deg, rgba(45, 45, 31, 0.9) 0%, rgba(60, 60, 40, 0.9) 100%),
@@ -95,7 +91,7 @@
             text-shadow: 0 0 5px rgba(143, 188, 143, 0.5);
         }
 
-        /* Document Container */
+        /* Document Container - ORIGINAL DESKTOP */
         .document-container {
             max-width: 900px;
             margin: 2rem auto;
@@ -133,7 +129,7 @@
             font-size: 1.5rem;
         }
 
-        /* Document Pages */
+        /* Document Pages - ORIGINAL DESKTOP */
         .document-page {
             background: 
                 linear-gradient(to bottom, rgba(212, 193, 158, 0.95), rgba(196, 176, 148, 0.95)),
@@ -196,7 +192,7 @@
             color: #4a5d3a;
         }
 
-        /* Content Sections */
+        /* Content Sections - ORIGINAL DESKTOP */
         .section {
             margin-bottom: 3rem;
         }
@@ -223,7 +219,7 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Mission Objectives */
+        /* Mission Objectives - ORIGINAL DESKTOP */
         .objectives-list {
             list-style: none;
             padding: 0;
@@ -264,7 +260,7 @@
             line-height: 1.6;
         }
 
-        /* Personnel Files */
+        /* Personnel Files - ORIGINAL DESKTOP */
         .personnel-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -292,6 +288,11 @@
             transform: rotate(15deg);
         }
 
+        .personnel-file.classified::before {
+            content: 'CLASSIFIED';
+            background: #ff6b6b;
+        }
+
         .personnel-name {
             font-size: 1.3rem;
             color: #4a5d3a;
@@ -313,7 +314,14 @@
             color: #2d2d1f;
         }
 
-        /* Stamps */
+        .redacted {
+            background: #000;
+            color: #000;
+            user-select: none;
+            padding: 0 4px;
+        }
+
+        /* Stamps - ORIGINAL DESKTOP */
         .document-stamps {
             position: absolute;
             top: 0;
@@ -336,18 +344,78 @@
 
         .stamp-1 { top: 30px; right: 30px; transform: rotate(-12deg); }
         .stamp-2 { bottom: 30px; left: 30px; transform: rotate(8deg); background: rgba(0, 100, 0, 0.6); }
-        .stamp-3 { top: 50%; left: 20px; transform: translateY(-50%) rotate(-90deg); background: rgba(0, 0, 255, 0.6); }
 
-        /* Responsive */
+        /* Mobile Menu - ONLY MOBILE */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: 2px solid #d4c19e;
+            color: #d4c19e;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle:hover {
+            border-color: #8FBC8F;
+            color: #8FBC8F;
+        }
+
+        .mobile-nav-links {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(45, 45, 31, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid #4a5d3a;
+            padding: 1rem 0;
+        }
+
+        .mobile-nav-links.show {
+            display: block;
+        }
+
+        .mobile-nav-links a {
+            display: block;
+            padding: 1rem 2rem;
+            color: #d4c19e;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0,0,0,0.1);
+        }
+
+        .mobile-nav-links a:hover, .mobile-nav-links a.active {
+            color: #8FBC8F;
+            background: rgba(143, 188, 143, 0.1);
+            text-shadow: 0 0 5px rgba(143, 188, 143, 0.5);
+        }
+
+        /* MOBILE RESPONSIVE - ONLY AFFECTS MOBILE */
         @media (max-width: 768px) {
             .nav-content {
-                flex-direction: column;
+                flex-direction: row;
+                justify-content: space-between;
                 gap: 1rem;
                 padding: 1rem;
+                position: relative;
             }
 
             .nav-links {
-                gap: 1rem;
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
             }
 
             .document-container {
@@ -370,6 +438,74 @@
             .personnel-grid {
                 grid-template-columns: 1fr;
             }
+
+            .section-header {
+                font-size: 1.1rem;
+                padding: 0.6rem 0.8rem;
+            }
+
+            .section-content {
+                font-size: 1rem;
+            }
+
+            .objective-item {
+                padding: 1.2rem;
+            }
+
+            .personnel-file {
+                padding: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+                padding: 6px 12px;
+            }
+
+            .nav-content {
+                padding: 0.8rem;
+            }
+
+            .document-page {
+                padding: 1.5rem 1rem;
+            }
+
+            .doc-title {
+                font-size: 1.5rem;
+                letter-spacing: 1px;
+            }
+
+            .classified-header {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+                letter-spacing: 2px;
+            }
+
+            .classified-header::before,
+            .classified-header::after {
+                font-size: 1.2rem;
+            }
+
+            .mobile-nav-links a {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Touch-friendly improvements */
+        @media (pointer: coarse) {
+            .mobile-menu-toggle {
+                min-height: 44px;
+                min-width: 60px;
+            }
+
+            .mobile-nav-links a {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
         }
     </style>
 </head>
@@ -378,12 +514,25 @@
     <nav class="nav-container">
         <div class="nav-content">
             <a href="/supply-depot" class="logo">RATIONS</a>
+            
+            <!-- Desktop Navigation -->
             <ul class="nav-links">
                 <li><a href="/supply-depot">Supply Depot</a></li>
                 <li><a href="/mission-brief" class="active">Mission Brief</a></li>
                 <li><a href="/merchandise">Surplus Gear</a></li>
                 <li><a href="/field-manual">Field Manual</a></li>
             </ul>
+
+            <!-- Mobile Menu Toggle - ONLY VISIBLE ON MOBILE -->
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">MENU</button>
+            
+            <!-- Mobile Navigation - ONLY VISIBLE ON MOBILE -->
+            <div class="mobile-nav-links" id="mobile-nav">
+                <a href="/supply-depot">Supply Depot</a>
+                <a href="/mission-brief" class="active">Mission Brief</a>
+                <a href="/merchandise">Surplus Gear</a>
+                <a href="/field-manual">Field Manual</a>
+            </div>
         </div>
     </nav>
 
@@ -398,7 +547,6 @@
             <div class="document-stamps">
                 <div class="stamp stamp-1">APPROVED</div>
                 <div class="stamp stamp-2">AUTHORIZED</div>
-                <div class="stamp stamp-3">FILED</div>
             </div>
 
             <div class="page-header">
@@ -455,53 +603,46 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Personnel Section -->
-        <div class="document-page">
-            <div class="page-header">
-                <h2 class="doc-title">OPERATIONAL PERSONNEL</h2>
-                <p class="doc-subtitle">KEY PERSONNEL AND COMMAND STRUCTURE</p>
-            </div>
-
+            <!-- Command Roster -->
             <div class="section">
                 <div class="section-header">III. COMMAND ROSTER</div>
                 <div class="personnel-grid">
                     <div class="personnel-file">
-                        <div class="personnel-name">COL. MIKE "FORMULA" RODRIGUEZ</div>
-                        <div class="personnel-rank">CHIEF RESEARCH OFFICER - FLAVOR DEVELOPMENT</div>
+                        <div class="personnel-name">Mike "Forge" Rodriguez</div>
+                        <div class="personnel-rank">Senior Flavor Operations Specialist</div>
                         <div class="personnel-bio">
-                            The mastermind behind STANDARD ISSUE. 15-year veteran of military R&D with classified experience in biochemical flavor enhancement. Rodriguez personally engineered the proprietary spice matrix that makes STANDARD ISSUE tactically superior to civilian seasonings. His legendary palate can detect flavor deficiencies at the molecular level.
+                            25-year veteran of advanced culinary operations. Led breakthrough research in tactical seasoning development across 12 different combat zones. Personally responsible for developing the base formula that became RATIONS Standard Issue. Known for his ability to create exceptional meals under extreme conditions.
                         </div>
                     </div>
 
                     <div class="personnel-file">
-                        <div class="personnel-name">CPT. SARAH "LOGISTICS" CHEN</div>
-                        <div class="personnel-rank">OPERATIONS COMMANDER - SUPPLY CHAIN</div>
+                        <div class="personnel-name">Jen "Phoenix" Gutekunst</div>
+                        <div class="personnel-rank">Quality Assurance Division Chief</div>
                         <div class="personnel-bio">
-                            Expert in tactical logistics and supply chain operations. Chen ensures seamless deployment of STANDARD ISSUE from production facilities to civilian distribution points. Her background in military quartermaster operations guarantees zero-failure logistics support for all mission objectives.
+                            Expert in flavor chemistry and sensory analysis. Oversees all quality control protocols and civilian deployment testing. Developed the standardized taste-testing procedures that ensure consistent flavor enhancement across all production batches. Certified in advanced culinary sciences.
                         </div>
                     </div>
 
                     <div class="personnel-file">
-                        <div class="personnel-name">SGT. MARCUS "QUALITY" THOMPSON</div>
-                        <div class="personnel-rank">FIELD SUPERVISOR - QUALITY ASSURANCE</div>
+                        <div class="personnel-name">Tawny "Hound" Dachs</div>
+                        <div class="personnel-rank">Distribution & Logistics Coordinator</div>
                         <div class="personnel-bio">
-                            Front-line specialist responsible for maintaining STANDARD ISSUE quality standards in civilian deployment zones. Thompson's rigorous field testing protocols ensure every container meets military-grade specifications before reaching civilian hands.
+                            Strategic deployment specialist with expertise in supply chain optimization. Coordinates worldwide distribution networks and ensures rapid response to flavor emergency situations. Known for exceptional attention to detail and ability to maintain operational security during civilian integration protocols.
                         </div>
                     </div>
 
-                    <div class="personnel-file">
-                        <div class="personnel-name">LT. ALEX "COMMS" RIVERA</div>
-                        <div class="personnel-rank">INTELLIGENCE OFFICER - MARKET ANALYSIS</div>
+                    <div class="personnel-file classified">
+                        <div class="personnel-name"><span class="redacted">████████ "████████" ████████</span></div>
+                        <div class="personnel-rank"><span class="redacted">█████████ ████████ ████████</span></div>
                         <div class="personnel-bio">
-                            Coordinates intelligence gathering on civilian market conditions and competitor analysis. Rivera's strategic reconnaissance ensures RATIONS maintains tactical superiority in an increasingly competitive culinary battlefield.
+                            <span class="redacted">████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Mission Timeline -->
+            <!-- Deployment Timeline -->
             <div class="section">
                 <div class="section-header">IV. DEPLOYMENT TIMELINE</div>
                 <div class="section-content">
@@ -514,5 +655,36 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById('mobile-nav');
+            if (mobileNav) {
+                mobileNav.classList.toggle('show');
+            }
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileNav = document.getElementById('mobile-nav');
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            
+            if (mobileNav && menuToggle && event.target instanceof Node) {
+                if (!mobileNav.contains(event.target) && !menuToggle.contains(event.target)) {
+                    mobileNav.classList.remove('show');
+                }
+            }
+        });
+
+        // Close mobile menu when window is resized to desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                const mobileNav = document.getElementById('mobile-nav');
+                if (mobileNav) {
+                    mobileNav.classList.remove('show');
+                }
+            }
+        });
+    </script>
 </body>
 </html>
