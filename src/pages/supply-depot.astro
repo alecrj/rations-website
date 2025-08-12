@@ -8,10 +8,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RATIONS - Supply Depot</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Special+Elite:wght@400&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -19,18 +18,28 @@
         }
 
         body {
-            font-family: Georgia, serif;
-            background: #d4c19e;
+            font-family: 'Special Elite', 'Courier New', monospace;
+            background: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23d4c19e"/><g opacity="0.1"><line x1="0" y1="10" x2="100" y2="10" stroke="%23333" stroke-width="0.5"/><line x1="0" y1="20" x2="100" y2="20" stroke="%23333" stroke-width="0.5"/><line x1="0" y1="30" x2="100" y2="30" stroke="%23333" stroke-width="0.5"/><line x1="0" y1="40" x2="100" y2="40" stroke="%23333" stroke-width="0.5"/><line x1="0" y1="50" x2="100" y2="50" stroke="%23333" stroke-width="0.5"/></g></svg>') repeat,
+                linear-gradient(45deg, #d4c19e 25%, transparent 25%),
+                linear-gradient(-45deg, #d4c19e 25%, transparent 25%);
+            background-size: 200px 200px, 30px 30px, 30px 30px;
             color: #2d2d1f;
-            line-height: 1.6;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         /* Navigation */
         .nav-container {
-            background: rgba(74, 93, 58, 0.9);
+            background: 
+                linear-gradient(90deg, rgba(45, 45, 31, 0.9) 0%, rgba(60, 60, 40, 0.9) 100%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><rect width="50" height="50" fill="%23545438"/><path d="M0 25h50M25 0v50" stroke="%23333" stroke-width="0.5" opacity="0.3"/></svg>');
+            backdrop-filter: blur(2px);
             border-bottom: 3px solid #4a5d3a;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .nav-content {
@@ -43,152 +52,134 @@
         }
 
         .logo {
-            font-family: 'Courier Prime', monospace;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: bold;
-            color: #d4c19e;
-            text-decoration: none;
-            letter-spacing: 4px;
+            color: #8FBC8F;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            letter-spacing: 3px;
+            border: 2px solid #8FBC8F;
+            padding: 8px 16px;
+            background: rgba(0,0,0,0.2);
         }
 
         .nav-links {
             display: flex;
-            gap: 0;
+            gap: 2rem;
             list-style: none;
         }
 
         .nav-links a {
             color: #d4c19e;
             text-decoration: none;
-            font-weight: 600;
-            padding: 0.8rem 1.5rem;
+            font-weight: bold;
+            padding: 8px 16px;
             border: 1px solid transparent;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-size: 0.9rem;
+            background: rgba(0,0,0,0.1);
         }
 
-        .nav-links a:hover,
-        .nav-links a.active {
-            background: #8FBC8F;
-            color: #2d2d1f;
-            border-color: #4a5d3a;
+        .nav-links a:hover, .nav-links a.active {
+            color: #8FBC8F;
+            border-color: #8FBC8F;
+            background: rgba(143, 188, 143, 0.1);
+            text-shadow: 0 0 5px rgba(143, 188, 143, 0.5);
         }
 
         /* Document Container */
         .document-container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 2rem auto;
             padding: 0 2rem;
         }
 
-        /* Classification Header */
         .classified-header {
-            background: #4a5d3a;
-            color: #d4c19e;
+            background: #2d2d1f;
+            color: #ff6b6b;
+            padding: 1rem;
             text-align: center;
-            padding: 0.5rem;
-            font-family: 'Courier Prime', monospace;
             font-weight: bold;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            border: 3px solid #ff6b6b;
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.4);
             margin-bottom: 2rem;
-            font-size: 0.9rem;
+            position: relative;
         }
 
-        /* Document Page */
+        .classified-header::before {
+            content: '⚡';
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+        }
+
+        .classified-header::after {
+            content: '⚡';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+        }
+
+        /* Document Pages */
         .document-page {
-            background: rgba(255,255,255,0.8);
+            background: 
+                linear-gradient(to bottom, rgba(212, 193, 158, 0.95), rgba(196, 176, 148, 0.95)),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23d4c19e"/><g opacity="0.05"><line x1="0" y1="10" x2="100" y2="10" stroke="%23000" stroke-width="0.5"/><line x1="0" y1="20" x2="100" y2="20" stroke="%23000" stroke-width="0.5"/><line x1="0" y1="30" x2="100" y2="30" stroke="%23000" stroke-width="0.5"/></g></svg>');
             border: 3px solid #8a7a5a;
             padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             position: relative;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
 
         .document-page::before {
             content: '';
             position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            bottom: 20px;
-            border: 1px solid #8a7a5a;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 1px solid #6a5a3a;
             pointer-events: none;
         }
 
-        /* Document Stamps */
-        .document-stamps {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            display: flex;
-            gap: 1rem;
-        }
-
-        .stamp {
-            background: #ff6b6b;
-            color: white;
-            padding: 4px 8px;
-            font-family: 'Courier Prime', monospace;
-            font-size: 0.7rem;
-            font-weight: bold;
-            transform: rotate(15deg);
-            border: 2px solid #cc0000;
-        }
-
-        .stamp-2 {
-            transform: rotate(-10deg);
-            background: #4a5d3a;
-            border-color: #2d3d1f;
-        }
-
-        .stamp-3 {
-            transform: rotate(8deg);
-            background: #8FBC8F;
-            color: #2d2d1f;
-            border-color: #6b8a4a;
-        }
-
-        /* Page Header */
         .page-header {
             text-align: center;
-            margin-bottom: 3rem;
-            border-bottom: 3px solid #4a5d3a;
-            padding-bottom: 2rem;
+            border-bottom: 2px solid #4a5d3a;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
         }
 
         .doc-title {
-            font-family: 'Courier Prime', monospace;
-            font-size: 3rem;
-            color: #4a5d3a;
-            font-weight: bold;
-            letter-spacing: 6px;
+            font-size: 2.2rem;
+            color: #2d2d1f;
+            letter-spacing: 4px;
             margin-bottom: 0.5rem;
+            font-weight: bold;
         }
 
         .doc-subtitle {
-            font-family: 'Courier Prime', monospace;
             color: #6b7a5b;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             letter-spacing: 2px;
-            font-weight: 600;
         }
 
-        /* Document Info */
         .doc-info {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             font-family: 'Courier Prime', monospace;
-            font-size: 0.9rem;
         }
 
         .info-item {
-            display: flex;
-            justify-content: space-between;
+            background: rgba(255,255,255,0.3);
             padding: 0.5rem;
-            background: rgba(0,0,0,0.05);
             border: 1px solid #8a7a5a;
         }
 
@@ -197,7 +188,7 @@
             color: #4a5d3a;
         }
 
-        /* Sections */
+        /* Content Sections */
         .section {
             margin-bottom: 3rem;
         }
@@ -205,7 +196,7 @@
         .section-header {
             background: rgba(74, 93, 58, 0.8);
             color: #d4c19e;
-            padding: 1rem;
+            padding: 0.8rem 1rem;
             font-size: 1.3rem;
             font-weight: bold;
             letter-spacing: 2px;
@@ -224,42 +215,41 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Product Specifications */
+        /* Product Specs */
         .product-specs {
-            background: rgba(143, 188, 143, 0.2);
-            border: 2px solid #8FBC8F;
-            padding: 2rem;
+            background: rgba(255,255,255,0.4);
+            border: 2px solid #8a7a5a;
+            padding: 1.5rem;
+            position: relative;
             margin: 2rem 0;
         }
 
         .specs-header {
-            font-family: 'Courier Prime', monospace;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: #4a5d3a;
             font-weight: bold;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
         }
 
         .specs-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 1rem;
+            margin-top: 1rem;
             font-family: 'Courier Prime', monospace;
         }
 
         .spec-item {
-            background: rgba(255,255,255,0.5);
+            background: rgba(0,0,0,0.1);
+            padding: 0.5rem;
             border: 1px solid #8a7a5a;
-            padding: 1rem;
         }
 
         .spec-label {
             font-weight: bold;
             color: #4a5d3a;
             font-size: 0.8rem;
-            margin-bottom: 0.2rem;
         }
 
         .spec-value {
@@ -267,18 +257,19 @@
             font-size: 0.9rem;
         }
 
-        /* Order Information */
-        .order-info {
-            background: rgba(255,255,255,0.4);
-            border: 2px solid #8a7a5a;
+        /* Order Section */
+        .order-section {
+            background: rgba(143, 188, 143, 0.1);
+            border: 1px solid #8FBC8F;
             padding: 2rem;
             margin: 2rem 0;
             text-align: center;
+            border-left: 5px solid #4a5d3a;
         }
 
         .price-display {
             font-family: 'Courier Prime', monospace;
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: bold;
             color: #ff6b6b;
             margin: 1rem 0;
@@ -286,7 +277,7 @@
         }
 
         .order-button {
-            background: linear-gradient(135deg, #8FBC8F 0%, #6b8a4a 100%);
+            background: rgba(143, 188, 143, 0.8);
             color: #2d2d1f;
             border: 2px solid #4a5d3a;
             padding: 1rem 2rem;
@@ -296,25 +287,39 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: all 0.3s ease;
-            font-size: 1.1rem;
-            margin-top: 1rem;
+            font-size: 1rem;
         }
 
         .order-button:hover {
-            background: linear-gradient(135deg, #9ACD32 0%, #7ba428 100%);
+            background: rgba(143, 188, 143, 1);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
-        /* Footer */
-        .document-footer {
-            background: #2d2d1f;
-            color: #8a7a5a;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-            font-family: 'Courier Prime', monospace;
+        /* Stamps */
+        .document-stamps {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
         }
+
+        .stamp {
+            position: absolute;
+            background: rgba(255, 0, 0, 0.6);
+            color: white;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .stamp-1 { top: 30px; right: 30px; transform: rotate(-12deg); }
+        .stamp-2 { bottom: 30px; left: 30px; transform: rotate(8deg); background: rgba(0, 100, 0, 0.6); }
+        .stamp-3 { top: 50%; left: 20px; transform: translateY(-50%) rotate(-90deg); background: rgba(0, 0, 255, 0.6); }
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -337,15 +342,11 @@
             }
 
             .doc-title {
-                font-size: 2rem;
-                letter-spacing: 3px;
+                font-size: 1.8rem;
+                letter-spacing: 2px;
             }
 
             .doc-info {
-                grid-template-columns: 1fr;
-            }
-
-            .specs-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -355,7 +356,7 @@
     <!-- Navigation -->
     <nav class="nav-container">
         <div class="nav-content">
-            <a href="/" class="logo">RATIONS</a>
+            <div class="logo">RATIONS</div>
             <ul class="nav-links">
                 <li><a href="/supply-depot" class="active">Supply Depot</a></li>
                 <li><a href="/mission-brief">Mission Brief</a></li>
@@ -459,29 +460,14 @@
             </div>
 
             <!-- Order Information -->
-            <div class="order-info">
+            <div class="order-section">
                 <h3 style="color: #4a5d3a; margin-bottom: 1rem; font-family: 'Courier Prime', monospace; letter-spacing: 2px;">PROCUREMENT DETAILS</h3>
                 <div class="price-display">$14.95</div>
                 <p style="margin-bottom: 1rem; color: #2d2d1f;">Includes standard shipping to continental United States. International deployment available upon request.</p>
                 <button class="order-button">INITIATE PROCUREMENT</button>
                 <p style="margin-top: 1rem; font-size: 0.9rem; color: #6b7a5b;">30-day satisfaction guarantee. Quality assured or full refund authorized.</p>
             </div>
-
-            <!-- Footer Classification -->
-            <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #8a7a5a;">
-                <p style="color: #4a5d3a; font-weight: bold; font-size: 1rem; font-family: 'Courier Prime', monospace;">
-                    CLASSIFICATION: UNCLASSIFIED<br>
-                    DISTRIBUTION: UNLIMITED<br>
-                    DOCUMENT ID: SD-RATIONS-001
-                </p>
-            </div>
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer class="document-footer">
-        <p>RATIONS COMMAND - TACTICAL CULINARY DIVISION</p>
-        <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.7;">All products manufactured to military specifications</p>
-    </footer>
 </body>
 </html>
