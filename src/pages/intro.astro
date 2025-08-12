@@ -24,6 +24,9 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
         }
 
         .terminal {
@@ -39,6 +42,7 @@
                 inset 0 0 25px rgba(0, 0, 0, 0.6);
             position: relative;
             overflow: hidden;
+            touch-action: none;
         }
 
         .terminal::before {
@@ -61,13 +65,8 @@
 
         .terminal-content {
             height: 100%;
-            overflow-y: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .terminal-content::-webkit-scrollbar {
-            display: none;
+            overflow: hidden;
+            position: relative;
         }
 
         .typewriter-text {
@@ -76,8 +75,12 @@
             white-space: pre-wrap;
             color: #00ff00;
             letter-spacing: 1.2px;
-            min-height: 100%;
             text-shadow: 0 0 3px rgba(0, 255, 0, 0.3);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transition: transform 0.1s ease-out;
         }
 
         .cursor {
@@ -86,8 +89,11 @@
             height: 21px;
             background: #00ff00;
             animation: blink 1s infinite;
-            margin-left: 2px;
+            margin-left: 1px;
             box-shadow: 0 0 4px rgba(0, 255, 0, 0.4);
+            vertical-align: baseline;
+            position: relative;
+            top: 2px;
         }
 
         @keyframes blink {
@@ -104,6 +110,10 @@
             font-size: 14px;
             text-align: center;
             opacity: 0.8;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 16px;
+            border-radius: 4px;
         }
 
         .website {
@@ -124,6 +134,7 @@
             transition: all 1.2s ease;
             color: #f5f5dc;
             text-align: center;
+            z-index: 2000;
         }
 
         .website.show {
@@ -173,15 +184,26 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
             .terminal {
-                padding: 25px;
-                width: 95%;
-                height: 85vh;
+                padding: 25px 20px;
+                width: 100%;
+                height: 100vh;
+                border-radius: 0;
+                border: 2px solid #333;
             }
             
             .typewriter-text {
-                font-size: 17px;
+                font-size: 16px;
                 line-height: 1.6;
+                letter-spacing: 1px;
+            }
+            
+            .cursor {
+                height: 18px;
             }
             
             .logo {
@@ -193,14 +215,33 @@
                 font-size: 1.3rem;
                 letter-spacing: 2px;
             }
+            
+            .enter-btn {
+                padding: 15px 25px;
+                font-size: 1.1rem;
+                letter-spacing: 2px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .typewriter-text {
+                font-size: 14px;
+                line-height: 1.5;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+                letter-spacing: 4px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="terminal">
-        <div class="terminal-content" id="terminal-scroll">
-            <div class="typewriter-text" id="content"></div>
-            <span class="cursor" id="cursor"></span>
+        <div class="terminal-content" id="terminal-container">
+            <div class="typewriter-text" id="content">
+                <span class="cursor" id="cursor"></span>
+            </div>
         </div>
     </div>
 
@@ -218,10 +259,11 @@
         // @ts-nocheck
         const content = document.getElementById('content');
         const cursor = document.getElementById('cursor');
-        const terminalScroll = document.getElementById('terminal-scroll');
+        const terminalContainer = document.getElementById('terminal-container');
         let isSkipped = false;
         let currentIndex = 0;
         let audioContext = null;
+        let scrollOffset = 0;
 
         const text = `> ACCESSING CLASSIFIED TERMINAL...
 > LOGIN SUCCESSFUL
@@ -275,7 +317,7 @@ STANDARD ISSUE delivers tactical flavor superiority.
 MISSION PARAMETERS:
 Deploy on everything. Leave no meal unseasoned.
 
-CLASSIFICATION: CLASSIFIED[CORRECTION_POINT]DECLASSIFIED
+CLASSIFICATION: CLASSIFIED
 AUTHORIZATION: APPROVED FOR PUBLIC RELEASE
 
 The flavor revolution begins now.
@@ -318,18 +360,17 @@ That's still classified.
                 osc.connect(gain);
                 gain.connect(audioContext.destination);
                 
-                // Very subtle, soft click
-                osc.frequency.setValueAtTime(200 + Math.random() * 100, audioContext.currentTime);
+                osc.frequency.setValueAtTime(400 + Math.random() * 200, audioContext.currentTime);
                 osc.type = 'sine';
                 
                 gain.gain.setValueAtTime(0, audioContext.currentTime);
-                gain.gain.linearRampToValueAtTime(0.02, audioContext.currentTime + 0.01);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.06);
+                gain.gain.linearRampToValueAtTime(0.05, audioContext.currentTime + 0.01);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.08);
                 
                 osc.start(audioContext.currentTime);
-                osc.stop(audioContext.currentTime + 0.06);
+                osc.stop(audioContext.currentTime + 0.08);
             } catch (e) {
-                // Silent fail
+                console.log('Click sound failed:', e);
             }
         }
 
@@ -344,26 +385,42 @@ That's still classified.
                 osc.connect(gain);
                 gain.connect(audioContext.destination);
                 
-                osc.frequency.setValueAtTime(400, audioContext.currentTime);
-                osc.frequency.linearRampToValueAtTime(500, audioContext.currentTime + 0.1);
+                osc.frequency.setValueAtTime(500, audioContext.currentTime);
+                osc.frequency.linearRampToValueAtTime(600, audioContext.currentTime + 0.1);
                 osc.type = 'sine';
                 
                 gain.gain.setValueAtTime(0, audioContext.currentTime);
-                gain.gain.linearRampToValueAtTime(0.04, audioContext.currentTime + 0.02);
+                gain.gain.linearRampToValueAtTime(0.06, audioContext.currentTime + 0.02);
                 gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.15);
                 
                 osc.start(audioContext.currentTime);
                 osc.stop(audioContext.currentTime + 0.15);
             } catch (e) {
-                // Silent fail
+                console.log('Chime sound failed:', e);
             }
         }
 
         function autoScroll() {
-            terminalScroll.scrollTop = terminalScroll.scrollHeight;
+            const containerHeight = terminalContainer.clientHeight;
+            const contentHeight = content.offsetHeight;
+            const cursorPosition = cursor.offsetTop + cursor.offsetHeight;
+            
+            // Calculate smooth scroll position
+            const targetScroll = Math.max(0, cursorPosition - containerHeight + 60);
+            
+            if (targetScroll > 0) {
+                const currentTransform = content.style.transform;
+                const currentY = currentTransform ? parseInt(currentTransform.match(/-?\d+/)?.[0] || '0') : 0;
+                const newY = -targetScroll;
+                
+                // Only update if we need to scroll more
+                if (Math.abs(newY - currentY) > 5) {
+                    content.style.transform = `translateY(${newY}px)`;
+                }
+            }
         }
 
-        let isCorrectingClassification = false;
+        let remainingText = '';
 
         function type() {
             if (isSkipped || currentIndex >= text.length) {
@@ -371,25 +428,26 @@ That's still classified.
                 return;
             }
 
-            // Check for correction point
-            if (text.substring(currentIndex, currentIndex + 18) === '[CORRECTION_POINT]') {
-                currentIndex += 18; // Skip the marker
-                isCorrectingClassification = true;
+            const char = text[currentIndex];
+            
+            // Insert character before cursor
+            const textNode = document.createTextNode(char);
+            content.insertBefore(textNode, cursor);
+            
+            // Check if we just finished typing "CLASSIFIED"
+            const currentText = getCurrentText();
+            if (currentText.endsWith('CLASSIFICATION: CLASSIFIED') && !remainingText) {
+                // Store the remaining text to type after correction
+                remainingText = text.substring(currentIndex + 1);
                 
-                // Show CLASSIFIED first
-                content.textContent += 'CLASSIFIED';
-                
-                // Pause, then start correction
+                // Start correction immediately
                 setTimeout(() => {
                     if (!isSkipped) {
-                        correctClassification();
+                        correctClassificationImmediate();
                     }
-                }, 1500);
+                }, 500);
                 return;
             }
-
-            const char = text[currentIndex];
-            content.textContent += char;
             
             // Enhanced audio feedback
             if (char === '>') {
@@ -398,9 +456,9 @@ That's still classified.
                 playSubtleClick();
             }
             
-            // Smooth auto-scroll every few characters
-            if (currentIndex % 4 === 0) {
-                autoScroll();
+            // Smooth auto-scroll every character for better experience
+            if (currentIndex % 2 === 0) {
+                requestAnimationFrame(() => autoScroll());
             }
             
             currentIndex++;
@@ -410,58 +468,141 @@ That's still classified.
             else if (char === '.' || char === ':' || char === '!') delay = 80;
             else if (char === ' ') delay = 15;
             else if (char === '>') delay = 180;
+            
             setTimeout(() => type(), delay + Math.random() * 10);
         }
 
-        function correctClassification() {
-            // Backspace "CLASSIFIED" (10 characters)
+        function getCurrentText() {
+            let textContent = '';
+            for (let node of content.childNodes) {
+                if (node !== cursor && node.nodeType === Node.TEXT_NODE) {
+                    textContent += node.textContent;
+                }
+            }
+            return textContent;
+        }
+
+        function finish() {
+            if (isSkipped) {
+                // Clear content and add all text with DECLASSIFIED correction
+                while (content.firstChild && content.firstChild !== cursor) {
+                    content.removeChild(content.firstChild);
+                }
+                const correctedText = text.replace('CLASSIFICATION: CLASSIFIED', 'CLASSIFICATION: DECLASSIFIED');
+                const textNode = document.createTextNode(correctedText);
+                content.insertBefore(textNode, cursor);
+                requestAnimationFrame(() => autoScroll());
+            }
+            
+            // Hide cursor and show website
+            cursor.style.display = 'none';
+            setTimeout(() => showWebsite(), 2000);
+        }
+
+        function correctClassificationImmediate() {
+            const currentText = getCurrentText();
+            const classifiedIndex = currentText.lastIndexOf('CLASSIFICATION: CLASSIFIED');
+            
+            if (classifiedIndex === -1) {
+                continueTypingRemaining();
+                return;
+            }
+            
+            const beforeClassified = currentText.substring(0, classifiedIndex + 'CLASSIFICATION: '.length);
+            
+            // Start backspacing "CLASSIFIED"
             let backspaceCount = 0;
             const backspaceInterval = setInterval(() => {
-                if (backspaceCount >= 10 || isSkipped) {
+                if (backspaceCount >= 10 || isSkipped) { // "CLASSIFIED" is 10 chars
                     clearInterval(backspaceInterval);
                     // Now type "DECLASSIFIED"
                     setTimeout(() => {
                         if (!isSkipped) {
-                            typeCorrection('DECLASSIFIED', 0);
+                            typeNewWordImmediate(beforeClassified, 'DECLASSIFIED', 0);
                         }
                     }, 200);
                     return;
                 }
                 
-                content.textContent = content.textContent.slice(0, -1);
+                const currentWord = 'CLASSIFIED'.substring(0, 10 - backspaceCount - 1);
+                // Clear text nodes but keep cursor
+                while (content.firstChild && content.firstChild !== cursor) {
+                    content.removeChild(content.firstChild);
+                }
+                const newTextNode = document.createTextNode(beforeClassified + currentWord);
+                content.insertBefore(newTextNode, cursor);
+                requestAnimationFrame(() => autoScroll());
                 backspaceCount++;
-            }, 50);
+            }, 60);
         }
 
-        function typeCorrection(word, charIndex) {
+        function typeNewWordImmediate(before, word, charIndex) {
             if (charIndex >= word.length || isSkipped) {
-                // Continue with normal typing
+                // Continue typing the remaining text
                 setTimeout(() => {
                     if (!isSkipped) {
-                        type();
+                        continueTypingRemaining();
                     }
-                }, 300);
+                }, 200);
                 return;
             }
             
-            content.textContent += word[charIndex];
+            const currentWord = word.substring(0, charIndex + 1);
+            // Clear text nodes but keep cursor
+            while (content.firstChild && content.firstChild !== cursor) {
+                content.removeChild(content.firstChild);
+            }
+            const newTextNode = document.createTextNode(before + currentWord);
+            content.insertBefore(newTextNode, cursor);
             playSubtleClick();
+            requestAnimationFrame(() => autoScroll());
             
             setTimeout(() => {
-                typeCorrection(word, charIndex + 1);
+                typeNewWordImmediate(before, word, charIndex + 1);
             }, 80);
         }
 
-        function finish() {
-            if (isSkipped) {
-                content.textContent = text;
+        function continueTypingRemaining() {
+            if (!remainingText || isSkipped) {
+                finish();
+                return;
             }
             
-            autoScroll();
-            cursor.style.display = 'none';
+            // Continue typing character by character from remaining text
+            let remainingIndex = 0;
             
-            setTimeout(() => playSystemChime(), 400);
-            setTimeout(() => showWebsite(), 2200);
+            function typeRemainingChar() {
+                if (remainingIndex >= remainingText.length || isSkipped) {
+                    finish();
+                    return;
+                }
+                
+                const char = remainingText[remainingIndex];
+                const textNode = document.createTextNode(char);
+                content.insertBefore(textNode, cursor);
+                
+                if (char === '>') {
+                    playSystemChime();
+                } else if (char !== ' ' && char !== '\n' && char !== '=') {
+                    playSubtleClick();
+                }
+                
+                if (remainingIndex % 2 === 0) {
+                    requestAnimationFrame(() => autoScroll());
+                }
+                
+                remainingIndex++;
+                
+                let delay = 30;
+                if (char === '\n') delay = 100;
+                else if (char === '.' || char === ':' || char === '!') delay = 80;
+                else if (char === ' ') delay = 15;
+                else if (char === '>') delay = 180;
+                
+                setTimeout(() => typeRemainingChar(), delay + Math.random() * 10);
+            }
+            
+            typeRemainingChar();
         }
 
         function showWebsite() {
@@ -491,9 +632,12 @@ That's still classified.
             }
         });
 
+        // Prevent manual scrolling
+        document.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
+        document.addEventListener('wheel', (e) => e.preventDefault(), { passive: false });
+
         window.addEventListener('load', () => {
             setTimeout(() => {
-                // Initialize audio but don't start until user interacts
                 initAudio();
                 type();
             }, 1000);
