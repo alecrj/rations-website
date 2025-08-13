@@ -666,46 +666,55 @@
     </div>
 
     <script>
-        function toggleMobileMenu() {
-            const mobileNav = document.getElementById('mobile-nav');
-            if (mobileNav) {
-                mobileNav.classList.toggle('show');
-            }
+    function toggleMobileMenu() {
+        const mobileNav = document.getElementById('mobile-nav');
+        if (mobileNav) {
+            mobileNav.classList.toggle('show');
         }
+    }
 
-        // Enhanced mobile support - wait for DOM ready
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuButton = document.querySelector('.mobile-menu-toggle');
+    // Wait for page to fully load
+    window.addEventListener('load', function() {
+        const menuButton = document.querySelector('.mobile-menu-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+        
+        if (menuButton && mobileNav) {
+            // Remove any existing listeners
+            menuButton.replaceWith(menuButton.cloneNode(true));
+            const newMenuButton = document.querySelector('.mobile-menu-toggle');
             
-            if (menuButton) {
-                // Add both click and touch events for better mobile support
-                menuButton.addEventListener('click', function(e) {
+            if (newMenuButton) {
+                // Add click handler
+                newMenuButton.addEventListener('click', function(e) {
                     e.preventDefault();
+                    e.stopPropagation();
                     toggleMobileMenu();
                 });
                 
-                menuButton.addEventListener('touchend', function(e) {
+                // Add touch handler for mobile
+                newMenuButton.addEventListener('touchstart', function(e) {
                     e.preventDefault();
+                    e.stopPropagation();
                     toggleMobileMenu();
                 });
             }
-        });
-
-        // Close mobile menu when clicking outside
+        }
+        
+        // Close menu when clicking outside
         document.addEventListener('click', function(event) {
             const mobileNav = document.getElementById('mobile-nav');
             const menuToggle = document.querySelector('.mobile-menu-toggle');
             
-            if (mobileNav && menuToggle) {
-                if (event.target instanceof Element && 
+            if (mobileNav && menuToggle && mobileNav.classList.contains('show')) {
+                if (event.target instanceof Node && 
                     !mobileNav.contains(event.target) && 
                     !menuToggle.contains(event.target)) {
                     mobileNav.classList.remove('show');
                 }
             }
         });
-
-        // Close mobile menu when window is resized to desktop
+        
+        // Close menu on window resize
         window.addEventListener('resize', function() {
             if (window.innerWidth > 768) {
                 const mobileNav = document.getElementById('mobile-nav');
@@ -714,4 +723,5 @@
                 }
             }
         });
-    </script>
+    });
+</script>
